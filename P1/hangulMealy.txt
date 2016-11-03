@@ -1,0 +1,821 @@
+State
+s,v,o,u,a,i,k,n,r,l
+Input symbol
+q, ,w,e,r,t,y,u,i,o,p,a,s,d,f,g,h,j,k,l,z,x,c,v,b,n,m
+Q,W,E,R,T,O,P
+##초성으로 시작
+State transition function
+s,q,v
+s,Q,v
+s,w,v
+s,W,v
+s,e,v
+s,E,v
+s,r,v
+s,R,v
+s,t,v
+s,T,v
+s,a,v
+s,s,v
+s,d,v
+s,f,v
+s,g,v
+s,z,v
+s,x,v
+s,c,v
+s,v,v
+Output function
+s,q,new,cho,ㅂ
+s,Q,new,cho,ㅃ
+s,w,new,cho,ㅈ
+s,W,new,cho,ㅉ
+s,e,new,cho,ㄷ
+s,E,new,cho,ㄸ
+s,r,new,cho,ㄱ
+s,R,new,cho,ㄲ
+s,t,new,cho,ㅅ
+s,T,new,cho,ㅆ
+s,a,new,cho,ㅁ
+s,s,new,cho,ㄴ
+s,d,new,cho,ㅇ
+s,f,new,cho,ㄹ
+s,g,new,cho,ㅎ
+s,z,new,cho,ㅋ
+s,x,new,cho,ㅌ
+s,c,new,cho,ㅊ
+s,v,new,cho,ㅍ
+#단독 모음
+State transition function
+s,y,s
+s,u,s
+s,i,s
+s,o,s
+s,O,s
+s,p,s
+s,P,s
+s,h,s
+s,j,s
+s,k,s
+s,l,s
+s,b,s
+s,n,s
+s,m,s
+Output function
+s,y,new,mo,ㅛ
+s,u,new,mo,ㅕ
+s,i,new,mo,ㅑ
+s,o,new,mo,ㅐ
+s,O,new,mo,ㅒ
+s,p,new,mo,ㅔ
+s,P,new,mo,ㅖ
+s,h,new,mo,ㅗ
+s,j,new,mo,ㅓ
+s,k,new,mo,ㅏ
+s,l,new,mo,ㅣ
+s,b,new,mo,ㅠ
+s,n,new,mo,ㅜ
+s,m,new,mo,ㅡ
+#초성 반복
+State transition function
+v,q,v
+v,Q,v
+v,w,v
+v,W,v
+v,e,v
+v,W,v
+v,r,v
+v,R,v
+v,t,v
+v,T,v
+v,a,v
+v,s,v
+v,d,v
+v,f,v
+v,g,v
+v,z,v
+v,x,v
+v,c,v
+v,v,v
+Output function
+v,q,new,cho,ㅂ
+v,Q,new,cho,ㅃ
+v,w,new,cho,ㅈ
+v,W,new,cho,ㅉ
+v,e,new,cho,ㄷ
+v,E,new,cho,ㄸ
+v,r,new,cho,ㄱ
+v,R,new,cho,ㄲ
+v,t,new,cho,ㅅ
+v,T,new,cho,ㅆ
+v,a,new,cho,ㅁ
+v,s,new,cho,ㄴ
+v,d,new,cho,ㅇ
+v,f,new,cho,ㄹ
+v,g,new,cho,ㅎ
+v,z,new,cho,ㅋ
+v,x,new,cho,ㅌ
+v,c,new,cho,ㅊ
+v,v,new,cho,ㅍ
+#모음 반복 from o
+State transition function
+o,y,s
+o,u,s
+o,i,s
+o,O,s
+o,p,s
+o,P,s
+o,h,s
+o,j,s
+o,b,s
+o,n,s
+o,m,s
+Output function
+o,y,new,mo,ㅛ
+o,u,new,mo,ㅕ
+o,i,new,mo,ㅑ
+o,O,new,mo,ㅒ
+o,p,new,mo,ㅔ
+o,P,new,mo,ㅖ
+o,h,new,mo,ㅗ
+o,j,new,mo,ㅓ
+o,b,new,mo,ㅠ
+o,n,new,mo,ㅜ
+o,m,new,mo,ㅡ
+
+#모음 반복 from u
+State transition function
+u,y,s
+u,u,s
+u,i,s
+u,o,s
+u,O,s
+u,P,s
+u,h,s
+u,k,s
+u,b,s
+u,n,s
+u,m,s
+Output function
+u,y,new,mo,ㅛ
+u,u,new,mo,ㅕ
+u,i,new,mo,ㅑ
+u,o,new,mo,ㅐ
+u,O,new,mo,ㅒ
+u,P,new,mo,ㅖ
+u,h,new,mo,ㅗ
+u,k,new,mo,ㅏ
+u,b,new,mo,ㅠ
+u,n,new,mo,ㅜ
+u,m,new,mo,ㅡ
+
+#모음 반복 from a
+State transition function
+a,y,s
+a,u,s
+a,i,s
+a,o,s
+a,O,s
+a,p,s
+a,P,s
+a,h,s
+a,j,s
+a,k,s
+a,b,s
+a,n,s
+a,m,s
+Output function
+a,y,new,mo,ㅛ
+a,u,new,mo,ㅕ
+a,i,new,mo,ㅑ
+a,o,new,mo,ㅐ
+a,O,new,mo,ㅒ
+a,p,new,mo,ㅔ
+a,P,new,mo,ㅖ
+a,h,new,mo,ㅗ
+a,j,new,mo,ㅓ
+a,k,new,mo,ㅏ
+a,b,new,mo,ㅠ
+a,n,new,mo,ㅜ
+a,m,new,mo,ㅡ
+
+#모음 반복 from i
+State transition function
+i,y,s
+i,u,s
+i,i,s
+i,o,s
+i,O,s
+i,p,s
+i,P,s
+i,h,s
+i,j,s
+i,k,s
+i,l,s
+i,b,s
+i,n,s
+i,m,s
+Output function
+i,y,new,mo,ㅛ
+i,u,new,mo,ㅕ
+i,i,new,mo,ㅑ
+i,o,new,mo,ㅐ
+i,O,new,mo,ㅒ
+i,p,new,mo,ㅔ
+i,P,new,mo,ㅖ
+i,h,new,mo,ㅗ
+i,j,new,mo,ㅓ
+i,k,new,mo,ㅏ
+i,l,new,mo,ㅣ
+i,b,new,mo,ㅠ
+i,n,new,mo,ㅜ
+i,m,new,mo,ㅡ
+
+#중성으로 진행
+State transition function
+v,h,o
+
+v,n,u
+
+v,k,a
+v,i,a
+v,j,a
+v,u,a
+v,m,a
+
+v,y,i
+v,b,i
+v,l,i
+v,o,i
+v,O,i
+v,p,i
+v,P,i
+Output function
+v,h,cat,jung,ㅗ
+v,n,cat,jung,ㅜ
+v,k,cat,jung,ㅏ
+v,i,cat,jung,ㅑ
+v,j,cat,jung,ㅓ
+v,u,cat,jung,ㅕ
+v,m,cat,jung,ㅡ
+v,y,cat,jung,ㅛ
+v,b,cat,jung,ㅠ
+v,l,cat,jung,ㅣ
+v,o,cat,jung,ㅐ
+v,O,cat,jung,ㅒ
+v,p,cat,jung,ㅔ
+v,P,cat,jung,ㅖ
+#종성으로 진행 from o
+State transition function
+o,r,k
+o,q,k
+
+o,s,n
+
+o,f,r
+
+o,e,l
+o,a,l
+o,t,l
+o,d,l
+o,w,l
+o,c,l
+o,z,l
+o,x,l
+o,v,l
+o,g,l
+o,R,l
+o,T,l
+Output function
+o,r,cat,jong,ㄱ
+o,q,cat,jong,ㅂ
+
+o,s,cat,jong,ㄴ
+
+o,f,cat,jong,ㄹ
+
+o,e,cat,jong,ㄷ
+o,a,cat,jong,ㅁ
+o,t,cat,jong,ㅅ
+o,d,cat,jong,ㅇ
+o,w,cat,jong,ㅈ
+o,c,cat,jong,ㅊ
+o,z,cat,jong,ㅋ
+o,x,cat,jong,ㅌ
+o,v,cat,jong,ㅍ
+o,g,cat,jong,ㅎ
+o,R,cat,jong,ㄲ
+o,T,cat,jong,ㅆ
+#종성으로 진행 from u
+State transition function
+u,r,k
+u,q,k
+
+u,s,n
+
+u,f,r
+
+u,e,l
+u,a,l
+u,t,l
+u,d,l
+u,w,l
+u,c,l
+u,z,l
+u,x,l
+u,v,l
+u,g,l
+u,R,l
+u,T,l
+Output function
+u,r,cat,jong,ㄱ
+u,q,cat,jong,ㅂ
+
+u,s,cat,jong,ㄴ
+
+u,f,cat,jong,ㄹ
+
+u,e,cat,jong,ㄷ
+u,a,cat,jong,ㅁ
+u,t,cat,jong,ㅅ
+u,d,cat,jong,ㅇ
+u,w,cat,jong,ㅈ
+u,c,cat,jong,ㅊ
+u,z,cat,jong,ㅋ
+u,x,cat,jong,ㅌ
+u,v,cat,jong,ㅍ
+u,g,cat,jong,ㅎ
+u,R,cat,jong,ㄲ
+u,T,cat,jong,ㅆ
+# 종성으로 진행 from a
+State transition function
+a,r,k
+a,q,k
+
+a,s,n
+
+a,f,r
+
+a,e,l
+a,a,l
+a,t,l
+a,d,l
+a,w,l
+a,c,l
+a,z,l
+a,x,l
+a,v,l
+a,g,l
+a,R,l
+a,T,l
+Output function
+a,r,cat,jong,ㄱ
+a,q,cat,jong,ㅂ
+
+a,s,cat,jong,ㄴ
+
+a,f,cat,jong,ㄹ
+
+a,e,cat,jong,ㄷ
+a,a,cat,jong,ㅁ
+a,t,cat,jong,ㅅ
+a,d,cat,jong,ㅇ
+a,w,cat,jong,ㅈ
+a,c,cat,jong,ㅊ
+a,z,cat,jong,ㅋ
+a,x,cat,jong,ㅌ
+a,v,cat,jong,ㅍ
+a,g,cat,jong,ㅎ
+a,R,cat,jong,ㄲ
+a,T,cat,jong,ㅆ
+#종성으로 진행 from i
+State transition function
+i,r,k
+i,q,k
+
+i,s,n
+
+i,f,r
+
+i,e,l
+i,a,l
+i,t,l
+i,d,l
+i,w,l
+i,c,l
+i,z,l
+i,x,l
+i,v,l
+i,g,l
+i,R,l
+i,T,l
+Output function
+i,r,cat,jong,ㄱ
+i,q,cat,jong,ㅂ
+
+i,s,cat,jong,ㄴ
+
+i,f,cat,jong,ㄹ
+
+i,e,cat,jong,ㄷ
+i,a,cat,jong,ㅁ
+i,t,cat,jong,ㅅ
+i,d,cat,jong,ㅇ
+i,w,cat,jong,ㅈ
+i,c,cat,jong,ㅊ
+i,z,cat,jong,ㅋ
+i,x,cat,jong,ㅌ
+i,v,cat,jong,ㅍ
+i,g,cat,jong,ㅎ
+i,R,cat,jong,ㄲ
+i,T,cat,jong,ㅆ
+
+#모음으로 다음글자 cat from k
+State transition function
+k,h,o
+
+k,n,u
+
+k,k,a
+k,i,a
+k,j,a
+k,u,a
+k,m,a
+
+k,y,i
+k,b,i
+k,l,i
+k,o,i
+k,O,i
+k,p,i
+k,P,i
+Output function
+k,h,new with prev jong,ㅗ
+
+k,n,new with prev jong,ㅜ
+
+k,k,new with prev jong,ㅏ
+k,i,new with prev jong,ㅑ
+k,j,new with prev jong,ㅓ
+k,u,new with prev jong,ㅕ
+k,m,new with prev jong,ㅡ
+
+k,y,new with prev jong,ㅛ
+k,b,new with prev jong,ㅠ
+k,l,new with prev jong,ㅣ
+k,o,new with prev jong,ㅐ
+k,O,new with prev jong,ㅒ
+k,p,new with prev jong,ㅔ
+k,P,new with prev jong,ㅖ
+#모음으로 다음글자 cat from n
+State transition function
+n,h,o
+
+n,n,u
+
+n,k,a
+n,i,a
+n,j,a
+n,u,a
+n,m,a
+
+n,y,i
+n,b,i
+n,l,i
+n,o,i
+n,O,i
+n,p,i
+n,P,i
+Output function
+n,h,new with prev jong,ㅗ
+
+n,n,new with prev jong,ㅜ
+
+n,k,new with prev jong,ㅏ
+n,i,new with prev jong,ㅑ
+n,j,new with prev jong,ㅓ
+n,u,new with prev jong,ㅕ
+n,m,new with prev jong,ㅡ
+
+n,y,new with prev jong,ㅛ
+n,b,new with prev jong,ㅠ
+n,l,new with prev jong,ㅣ
+n,o,new with prev jong,ㅐ
+n,O,new with prev jong,ㅒ
+n,p,new with prev jong,ㅔ
+n,P,new with prev jong,ㅖ
+#모음으로 다음글자 cat from r
+State transition function
+r,h,o
+
+r,n,u
+
+r,k,a
+r,i,a
+r,j,a
+r,u,a
+r,m,a
+
+r,y,i
+r,b,i
+r,l,i
+r,o,i
+r,O,i
+r,p,i
+r,P,i
+Output function
+r,h,new with prev jong,ㅗ
+
+r,n,new with prev jong,ㅜ
+
+r,k,new with prev jong,ㅏ
+r,i,new with prev jong,ㅑ
+r,j,new with prev jong,ㅓ
+r,u,new with prev jong,ㅕ
+r,m,new with prev jong,ㅡ
+
+r,y,new with prev jong,ㅛ
+r,b,new with prev jong,ㅠ
+r,l,new with prev jong,ㅣ
+r,o,new with prev jong,ㅐ
+r,O,new with prev jong,ㅒ
+r,p,new with prev jong,ㅔ
+r,P,new with prev jong,ㅖ
+#모음으로 다음글자 cat from l
+State transition function
+l,h,o
+
+l,n,u
+
+l,k,a
+l,i,a
+l,j,a
+l,u,a
+l,m,a
+
+l,y,i
+l,b,i
+l,l,i
+l,o,i
+l,O,i
+l,p,i
+l,P,i
+Output function
+l,h,new with prev jong,ㅗ
+
+l,n,new with prev jong,ㅜ
+
+l,k,new with prev jong,ㅏ
+l,i,new with prev jong,ㅑ
+l,j,new with prev jong,ㅓ
+l,u,new with prev jong,ㅕ
+l,m,new with prev jong,ㅡ
+
+l,y,new with prev jong,ㅛ
+l,b,new with prev jong,ㅠ
+l,l,new with prev jong,ㅣ
+l,o,new with prev jong,ㅐ
+l,O,new with prev jong,ㅒ
+l,p,new with prev jong,ㅔ
+l,P,new with prev jong,ㅖ
+#자음으로 다음글자 from k without ㅅ
+State transition function
+k,q,v
+k,Q,v
+k,w,v
+k,W,v
+k,e,v
+k,E,v
+k,r,v
+k,R,v
+k,T,v
+k,a,v
+k,s,v
+k,d,v
+k,f,v
+k,g,v
+k,z,v
+k,x,v
+k,c,v
+k,v,v
+Output function
+k,q,new,cho,ㅂ
+k,Q,new,cho,ㅃ
+k,w,new,cho,ㅈ
+k,W,new,cho,ㅉ
+k,e,new,cho,ㄷ
+k,E,new,cho,ㄸ
+k,r,new,cho,ㄱ
+k,R,new,cho,ㄲ
+k,T,new,cho,ㅆ
+k,a,new,cho,ㅁ
+k,s,new,cho,ㄴ
+k,d,new,cho,ㅇ
+k,f,new,cho,ㄹ
+k,g,new,cho,ㅎ
+k,z,new,cho,ㅋ
+k,x,new,cho,ㅌ
+k,c,new,cho,ㅊ
+k,v,new,cho,ㅍ
+#자음으로 다음글자 from n without ㅈ,ㅎ
+State transition function
+n,q,v
+n,Q,v
+n,W,v
+n,e,v
+n,E,v
+n,r,v
+n,R,v
+n,t,v
+n,T,v
+n,a,v
+n,s,v
+n,d,v
+n,f,v
+n,z,v
+n,x,v
+n,c,v
+n,v,v
+Output function
+n,q,new,cho,ㅂ
+n,Q,new,cho,ㅃ
+n,W,new,cho,ㅉ
+n,e,new,cho,ㄷ
+n,E,new,cho,ㄸ
+n,r,new,cho,ㄱ
+n,R,new,cho,ㄲ
+n,t,new,cho,ㅅ
+n,T,new,cho,ㅆ
+n,a,new,cho,ㅁ
+n,s,new,cho,ㄴ
+n,d,new,cho,ㅇ
+n,f,new,cho,ㄹ
+n,z,new,cho,ㅋ
+n,x,new,cho,ㅌ
+n,c,new,cho,ㅊ
+n,v,new,cho,ㅍ
+#자음으로 다음글자 from r without ㄱ,ㅁ,ㅂ,ㅅ,ㅌ,ㅍ,ㅎ
+State transition function
+r,Q,v
+r,w,v
+r,W,v
+r,e,v
+r,E,v
+r,R,v
+r,T,v
+r,s,v
+r,d,v
+r,f,v
+r,z,v
+r,v,v
+Output function
+r,Q,new,cho,ㅃ
+r,w,new,cho,ㅈ
+r,W,new,cho,ㅉ
+r,e,new,cho,ㄷ
+r,E,new,cho,ㄸ
+r,R,new,cho,ㄲ
+r,T,new,cho,ㅆ
+r,s,new,cho,ㄴ
+r,d,new,cho,ㅇ
+r,f,new,cho,ㄹ
+r,z,new,cho,ㅋ
+r,c,new,cho,ㅊ
+#자음으로 다음글자 from l for all
+State transition function
+l,q,v
+l,Q,v
+l,w,v
+l,W,v
+l,e,v
+l,E,v
+l,r,v
+l,R,v
+l,t,v
+l,T,v
+l,a,v
+l,s,v
+l,d,v
+l,f,v
+l,g,v
+l,z,v
+l,x,v
+l,c,v
+l,v,v
+Output function
+l,q,new,cho,ㅂ
+l,Q,new,cho,ㅃ
+l,w,new,cho,ㅈ
+l,W,new,cho,ㅉ
+l,e,new,cho,ㄷ
+l,E,new,cho,ㄸ
+l,r,new,cho,ㄱ
+l,R,new,cho,ㄲ
+l,t,new,cho,ㅅ
+l,T,new,cho,ㅆ
+l,a,new,cho,ㅁ
+l,s,new,cho,ㄴ
+l,d,new,cho,ㅇ
+l,f,new,cho,ㄹ
+l,g,new,cho,ㅎ
+l,z,new,cho,ㅋ
+l,x,new,cho,ㅌ
+l,c,new,cho,ㅊ
+l,v,new,cho,ㅍ
+#자음으로 다음글자 with ㄸ,ㅃ,ㅉ
+State transition function
+o,E,v
+o,Q,v
+o,W,v
+u,E,v
+u,Q,v
+u,W,v
+a,E,v
+a,Q,v
+a,W,v
+i,E,v
+i,Q,v
+i,W,v
+Output function
+o,E,new,cho,ㄸ
+o,Q,new,cho,ㅃ
+o,W,new,cho,ㅉ
+u,E,new,cho,ㄸ
+u,Q,new,cho,ㅃ
+u,W,new,cho,ㅉ
+a,E,new,cho,ㄸ
+a,Q,new,cho,ㅃ
+a,W,new,cho,ㅉ
+i,E,new,cho,ㄸ
+i,Q,new,cho,ㅃ
+i,W,new,cho,ㅉ
+
+#겹모음
+State transition function
+o,k,i
+o,l,i
+o,o,i
+u,j,i
+u,l,i
+u,p,i
+a,l,i
+Output function
+o,k,to double,jung,ㅘ
+o,l,to double,jung,ㅚ
+o,o,to double,jung,ㅙ
+u,j,to double,jung,ㅝ
+u,l,to double,jung,ㅟ
+u,p,to double,jung,ㅞ
+a,l,to double,jung,ㅢ
+#겹자음? including ㄳ
+State transition function
+k,t,l
+n,w,l
+n,g,l
+r,r,l
+r,a,l
+r,q,l
+r,t,l
+r,x,l
+r,v,l
+r,g,l
+Output function
+k,t,to double,jong,ㄳ
+n,w,to double,jong,ㄵ
+n,g,to double,jong,ㄶ
+r,r,to double,jong,ㄺ
+r,a,to double,jong,ㄻ
+r,q,to double,jong,ㄼ
+r,t,to double,jong,ㄽ
+r,x,to double,jong,ㄾ
+r,v,to double,jong,ㄿ
+r,g,to double,jong,ㅀ
+
+#공백 처리
+#s, ,s
+#v, ,s
+#o, ,s
+#u, ,s
+#a, ,s
+#i, ,s
+#k, ,s
+#n, ,s
+#r, ,s
+#l, ,s
+#Output function
+#s, ,space
+#v, ,space
+#o, ,space
+#u, ,space
+#a, ,space
+#i, ,space
+#k, ,space
+#n, ,space
+#r, ,space
+#l, ,space
+
+
+Output symbol
+o,u,a,i,k,n,r,l
+
+Initial state
+s
