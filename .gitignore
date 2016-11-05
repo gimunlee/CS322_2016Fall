@@ -1,5 +1,7 @@
 .vscode/*
 !.vscode/launch.json
 **/.DS_Store
+*.pyc
+**/*.pyc
 
 __pycache__
