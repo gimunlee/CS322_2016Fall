@@ -50,7 +50,7 @@
             "request": "launch",
             "stopOnEntry": false,
             "pythonPath": "python3",
-            "program": "${file}",
+            "program": "${workspaceRoot}/P21/P21.py",
             "args": ["--nfa",
                 "./mye-nfa.txt",
                 "--input",

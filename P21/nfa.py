@@ -106,6 +106,8 @@ def groupEClosures():
     if (state,'E') in keys :
       #Check if epsilon-ee is forming a closure already
       for q in delta[(state,'E')] :
+        if q in closure :
+          continue
         nCheckedClosures=0
         for tempClosure in reversed(eclosures) :
           if q in tempClosure : # If it is, unite existing closure, then remove the older one.
@@ -115,8 +117,8 @@ def groupEClosures():
             break
           nCheckedClosures+=1
         if nCheckedClosures==len(eclosures) : # If not, just add itslef
-          closure.update(set([q])) 
-      queue.extend(delta[(state,'E')])
+          closure.update(set([q]))
+          queue.append(q)
 
     queueIndex+=1
 
