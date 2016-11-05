@@ -86,17 +86,10 @@ def groupEClosures():
   closure=set()
   while len(queue) < len(states):
     if queueIndex == len(queue) : # End of BFS
-      state=(states-set(queue)).pop()
-      nCheckedClosures=0
-      for tempClosure in reversed(eclosures) : # Search a closure that include 'state'
-        if state in tempClosure :
-          closure=tempClosure
-          break
-        nCheckedClosures+=1
-      if nCheckedClosures==len(eclosures) : # If there isn't, enlist another closure
-        closure=set([state])
-        queue.append(state)
-        eclosures.append(closure)
+      state=(states-set(queue)).pop() # Extract not queued state
+      closure=set([state])
+      queue.append(state)
+      eclosures.append(closure)
     else :
       state=queue[queueIndex]
 
@@ -122,4 +115,5 @@ def groupEClosures():
 
     queueIndex+=1
 
-  print("eclosures : %s"%eclosures)
+  if DEBUG :
+    print("eclosures : %s"%eclosures)

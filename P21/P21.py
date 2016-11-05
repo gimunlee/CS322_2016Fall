@@ -31,31 +31,6 @@ nfa.read(nfaFilePath)
 
 outputFile=open(outputFilePath,'w')
 inputFile=open(inputFilePath,'r')
-# for line in inputFile.readlines() :
-#   if DEBUG : print("================"); sys.stdout.write(line)
-#   currentState=nfa.initState
-#   for char in line :
-#     # end of line
-#     if char == '\n' : 
-#       if DEBUG :
-#         if nfa.isFinal(currentState) : print("Yes")
-#         else : print("No")
-#       if nfa.isFinal(currentState) : outputFile.write("Yes\n")
-#       else : outputFile.write("No\n")
-#       break
-#     # character in line
-#     if (currentState,char) in nfa.delta.keys() :
-#       # transition exists
-#       if DEBUG : print("%3s to %3s by %s"%(currentState,nfa.delta[currentState,char],char))
-#       currentState=nfa.delta[currentState,char]
-#     else :
-#       if DEBUG : print("no transition")
-#       if DEBUG :
-#         if nfa.isFinal(currentState) : print("Yes")
-#         else : print("No")
-#       if nfa.isFinal(currentState) : outputFile.write("Yes\n")
-#       else : outputFile.write("No\n")
-#       break
 outputFile.close()
 inputFile.close()
 
