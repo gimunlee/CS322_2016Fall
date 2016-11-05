@@ -43,4 +43,4 @@ outputFile=open(outputFilePath,'w')
 outputFile.write(buffer[:-1])
 outputFile.close()
 
-nfa.groupEClosures()
+# nfa.groupEClosures()

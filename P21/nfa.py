@@ -8,6 +8,7 @@ symbols=set()
 delta={}
 initState=""
 finalStates=set()
+eclosures=[]
 
 # flags for input files.
 flags={"State":False,
@@ -72,13 +73,19 @@ def read(nfaPath):
     print("delta : %s"%delta)
     print("symbols : %s"%symbols)
     print("states : %s"%states)
+  groupEClosures()
 def isFinal(state): # predicate for check final states
   return state in finalStates
 
 def groupEClosures():
+  newDelta={}
+  statesMap={}
+  newStates=set()
+  newInitState=""
+  newFinalStates=set()
+
   queue=[]
   queueIndex=0
-  eclosures=[]
 
   #referencing. for efficiency.
   keys=delta.keys()
@@ -117,3 +124,40 @@ def groupEClosures():
 
   if DEBUG :
     print("eclosures : %s"%eclosures)
+
+  #Build new states after grouping epsilon closure
+  i=0
+  for i in range(len(eclosures)) :
+    newState="q%d"%i
+    newStates.update(set([newState]))
+    for q in eclosures[i] :
+      statesMap[q]=newState
+  if DEBUG :
+    print("new States : %s"%newStates)
+    print("new States map : %s"%statesMap)
+  
+  #Accumulate delta to newDelta
+  for p in delta.keys() :
+    q, s = p
+    if s=='E' :
+      continue
+    for q2 in delta[(q,s)] :
+      if not ((statesMap[q],s) in newDelta) :
+        newDelta[(statesMap[q],s)]=set([statesMap[q2]])
+      else :
+        newDelta[(statesMap[q],s)].add(statesMap[q2])
+  if DEBUG :
+    print("new delta : %s"%newDelta)
+  
+  #Subset construction
+  subsets = set()
+  def subsetContruct(remainedStates) :
+    if len(remainedStates)==0 :
+      return set(set())
+    _subsets=set()
+    nextState=remainedStates.pop()
+    for subset in subsetContruct(remainedStates) :
+      _subsets.add(subset)
+      _subsets.add(set([nextState]).union(subset))
+    return _subsets
+  print("subsetconstruct test : %s"%subsetContruct(set('abc')))

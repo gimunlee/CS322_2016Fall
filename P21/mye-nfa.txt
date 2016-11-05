@@ -3,9 +3,11 @@ q0,q1,q2,q3
 Input symbol
 a,b
 State transition function
-q0,E,q0
+q0,E,q1
+q0,a,q1
 q1,E,q1
-q1,E,q0
+q1,a,q2
+q2,b,q3
 Initial state
 q0
 Final state
