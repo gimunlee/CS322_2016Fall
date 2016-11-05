@@ -45,6 +45,28 @@
             ]
         },
         {
+            "name": "Python P21",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "python3",
+            "program": "${file}",
+            "args": ["--nfa",
+                "./mye-nfa.txt",
+                "--input",
+                "./input.txt",
+                "--output",
+                "output.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "Integrated Terminal/Console",
             "type": "python",
             "request": "launch",
