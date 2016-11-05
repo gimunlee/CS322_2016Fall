@@ -1,18 +1,42 @@
 {
     "version": "0.2.0",
     "configurations": [{
+            "name": "Python debug",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${file}",
+            "args": ["--hangulMealy",
+                "./hangulMealy.txt",
+                "--input",
+                "./input.txt",
+                "--output",
+                "output.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "Python",
             "type": "python",
             "request": "launch",
             "stopOnEntry": false,
             "pythonPath": "${config.python.pythonPath}",
             "program": "${file}",
-            "args": ["--mealy",
-                "../mealy.txt",
+            "args": ["--hangulMealy",
+                "./hangulMealy.txt",
                 "--input",
-                "../P02/input.txt",
+                "./input.txt",
                 "--output",
-                "output.txt"
+                "output.txt",
+                "--debug",
+                "0"
             ],
             "debugOptions": [
                 "WaitOnAbnormalExit",
