@@ -1,14 +1,27 @@
 State
-q0,q1,q2,q3
+a,b,c,d,e,f,g,h,i
 Input symbol
-a,b
+0,1
 State transition function
-q0,E,q1
-q0,a,q1
-q1,E,q1
-q1,a,q2
-q2,b,q3
+a,0,b
+a,1,c
+b,0,f
+b,1,a
+c,0,i
+c,1,c
+d,0,c
+d,1,e
+e,0,d
+e,1,f
+f,0,i
+f,1,c
+g,0,f
+g,1,e
+h,0,i
+h,1,g
+i,0,a
+i,1,h
 Initial state
-q0
+a
 Final state
-q3
+i

@@ -10,6 +10,20 @@ initState=""
 finalStates=set()
 eclosures=[]
 
+def printNfa() :
+  print("== NFA ==")
+  print("init : %s"%initState)
+  print("fina : %s"%finalStates)
+  print("delta : %s"%delta)
+  print("symbols : %s"%symbols)
+  print("states : %s"%states)
+def printDelta() :
+  print("=-=-=-=-=-=- delta -=-=-=-=-=-=")
+  for q in sorted(list(states)) :
+    for s in sorted(list(symbols)) :
+      if (q,s) in delta :
+        print("%s(%s) => %s"%(q,s,delta[(q,s)]))
+
 # flags for input files.
 flags={"State":False,
         "Input symbol":False,
@@ -67,17 +81,15 @@ def read(nfaPath):
     else : # this line is info
       lineReader[currentFlag](line)
   f.close()
-  if DEBUG:
-    print("init : %s"%initState)
-    print("fina : %s"%finalStates)
-    print("delta : %s"%delta)
-    print("symbols : %s"%symbols)
-    print("states : %s"%states)
+  if DEBUG: printNfa()
   groupEClosures()
+  subsetConstruction()
+  minimize()
 def isFinal(state): # predicate for check final states
   return state in finalStates
 
 def groupEClosures():
+  global states, delta, initState, finalStates
   newDelta={}
   statesMap={}
   newStates=set()
@@ -128,7 +140,7 @@ def groupEClosures():
   #Build new states after grouping epsilon closure
   i=0
   for i in range(len(eclosures)) :
-    newState="q%d"%i
+    newState="qe%d"%i
     newStates.update(set([newState]))
     for q in eclosures[i] :
       statesMap[q]=newState
@@ -146,18 +158,142 @@ def groupEClosures():
         newDelta[(statesMap[q],s)]=set([statesMap[q2]])
       else :
         newDelta[(statesMap[q],s)].add(statesMap[q2])
-  if DEBUG :
-    print("new delta : %s"%newDelta)
+  if DEBUG : print("new delta : %s"%newDelta)
   
-  #Subset construction
-  subsets = set()
-  def subsetContruct(remainedStates) :
-    if len(remainedStates)==0 :
-      return set(set())
-    _subsets=set()
-    nextState=remainedStates.pop()
-    for subset in subsetContruct(remainedStates) :
-      _subsets.add(subset)
-      _subsets.add(set([nextState]).union(subset))
-    return _subsets
-  print("subsetconstruct test : %s"%subsetContruct(set('abc')))
+  newInitState=statesMap[initState]
+  for f in finalStates :
+    newFinalStates.add(statesMap[f])
+  if DEBUG :
+    print("newInitState : %s"%newInitState)
+    print("newFinalStates : %s"%newFinalStates)
+
+  states, delta, initState, finalStates = newStates, newDelta, newInitState, newFinalStates
+  if DEBUG : printNfa()
+  
+#Subset construction
+def getAllSubsets(remainedStates) :
+  if len(remainedStates)==0 :
+    return set()
+  if len(remainedStates)==1 :
+    t=set()
+    t.add(frozenset())
+    # t.add(tuple())
+    t.add(frozenset((remainedStates[0],)))
+    return t
+  tempSubsets=set()
+  for subset in getAllSubsets(remainedStates[1:]) :
+    tempSubsets.add(subset)
+    tempSubsets.add(subset.union(frozenset((remainedStates[0],))))
+  return tempSubsets
+def subsetConstruction() :
+  global states, delta, initState, finalStates
+  newStates=set()
+  newDelta={}
+  newInitState=''
+  newFinalStates=set()
+
+  subsets = getAllSubsets(list(states))
+  statesMap = {}
+  reverseMap = {}##########
+  i=0
+  for subset in subsets :
+    newState="qs%d"%i
+    i+=1
+    statesMap[subset]=newState
+    reverseMap[newState]=subset
+
+  if DEBUG : print("statesMap : %s"%statesMap)
+
+  # if delta[(initState,'a')] == delta[(initState,'b')] :
+  #   pass
+  if DEBUG : print("temp Final states : %s"%finalStates)
+  for subset in subsets :
+    #Add as final states
+    if len(subset.intersection(finalStates))>0 :
+      newFinalStates.add(statesMap[subset])
+    for s in symbols :
+      subset2 = set()
+      for q in subset :
+        if (q,s) in delta :
+          for q2 in delta[(q,s)] :
+            subset2.add(q2)
+      newDelta[(statesMap[subset],s)]=statesMap[frozenset(subset2)]
+  states=list(statesMap.values())
+  delta=newDelta
+  initState=statesMap[frozenset([initState])]
+
+  finalStates=set()
+
+  queue=[initState]
+  queueIndex=0
+  newStates=set()
+  newDelta={}
+  while queueIndex<len(queue) :
+    state = queue[queueIndex]
+    if state in newFinalStates :
+      finalStates.add(state)
+    newStates.add(state)
+    for s in symbols :
+      if (state, s) in delta.keys() :
+        q2 = delta[(state,s)]
+        newDelta[(state,s)]=q2
+        if not(q2 in newStates) :
+          queue.append(q2)
+    queueIndex+=1
+  delta = newDelta
+  states = newStates
+
+  if DEBUG:
+    printNfa()
+    printDelta()
+
+partitions=[]
+def minimize() :
+  global partitions
+  symbolsTuple=tuple(symbols)
+  print(symbolsTuple)
+  
+  partitions.append(frozenset(finalStates))
+  partitions.append(frozenset(states.difference(finalStates)))
+
+  def indexAmongPartitions(q) :
+    global partitions
+    for part in partitions :
+      if q in part :
+        return partitions.index(part)
+    return -1
+  def indexesAmongPartitions(q) :
+    tempList=[]
+    for s in symbolsTuple :
+      tempList.append( indexAmongPartitions(delta[(q,s)]) )
+    return tuple(tempList)
+  global states, delta, iniState, finalStates
+  
+  if DEBUG :
+    print("partitions : %s"%partitions)
+
+  distinguished=True
+  while distinguished :
+    distinguished=False
+    newPartitions=set()
+    for part in partitions :
+      partList=list(part)
+      partList.sort(key=indexesAmongPartitions)
+
+      tempPart=set()
+      tempPart.add(partList[0])
+      tempIndexes=indexesAmongPartitions(partList[0])
+      for state in partList[1:] :
+        if tempIndexes == indexesAmongPartitions(state) :
+          tempPart.add(state)
+        else :
+          distinguished=True
+          newPartitions.add(frozenset(tempPart))
+          tempPart.clear()
+          tempPart.add(state)
+          tempIndexes=indexesAmongPartitions(state)
+      newPartitions.add(frozenset(tempPart))
+    partitions=list(newPartitions)
+  for part in partitions :
+    print(part)
+  print("min_states : %d"%len(partitions))
