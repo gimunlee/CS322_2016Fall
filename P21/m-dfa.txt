@@ -1,0 +1,13 @@
+State
+qm1,qm0
+Input symbol
+b,a
+State transition function
+qm1,b,qm0
+qm1,a,qm0
+qm0,a,qm0
+qm0,b,qm0
+Initial state
+qm1
+Final state
+qm0

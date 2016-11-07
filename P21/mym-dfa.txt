@@ -1,0 +1,19 @@
+State
+qm2,qm1,qm4,qm3,qm0
+Input symbol
+1,0
+State transition function
+qm2,1,qm2
+qm2,0,qm4
+qm0,1,qm3
+qm4,0,qm1
+qm1,0,qm3
+qm4,1,qm0
+qm1,1,qm2
+qm3,0,qm2
+qm3,1,qm1
+qm0,0,qm4
+Initial state
+qm1
+Final state
+qm4

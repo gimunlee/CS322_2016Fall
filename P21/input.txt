@@ -1,3 +1,10 @@
-aEEEE
-EE
-aaEbE
+abba
+aababab
+bbaba
+abbab
+
+bb
+aa
+ba
+abb
+end
