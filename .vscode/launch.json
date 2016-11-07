@@ -52,7 +52,7 @@
             "pythonPath": "python",
             "program": "${workspaceRoot}/P21/P21.py",
             "args": ["--nfa",
-                "./mye-nfa.txt",
+                "./e-nfa.txt",
                 "--input",
                 "./input.txt",
                 "--output",

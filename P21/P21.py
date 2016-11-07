@@ -28,6 +28,7 @@ if '--debug' in sys.argv :
 import nfa
 # read nfa from file
 nfa.read(nfaFilePath)
+nfa.convert()
 
 outputFile=open(outputFilePath,'w')
 inputFile=open(inputFilePath,'r')

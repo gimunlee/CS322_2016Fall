@@ -10,13 +10,14 @@ initState=""
 finalStates=set()
 eclosures=[]
 
-def printNfa() :
-  print("== NFA ==")
+def printNfa(prompt="NFA") :
+  print("==%s=="%prompt)
   print("init : %s"%initState)
   print("fina : %s"%finalStates)
   print("delta : %s"%delta)
   print("symbols : %s"%symbols)
   print("states : %s"%states)
+  print("==%s=="%('='*len(prompt)))
 def printDelta() :
   print("=-=-=-=-=-=- delta -=-=-=-=-=-=")
   for q in sorted(list(states)) :
@@ -81,12 +82,77 @@ def read(nfaPath):
     else : # this line is info
       lineReader[currentFlag](line)
   f.close()
-  if DEBUG: printNfa()
-  groupEClosures()
-  subsetConstruction()
+  if DEBUG: printNfa('Read e-NFA')
+
+def convert() :
+  global states, initState, finalStates, delta
+  eClosures={}
+  for q in states :
+    eClosures[q]=eClose(q)
+  if DEBUG: print("EClosures : %s"%str(eClosures))
+
+  newInitState = eClosures[initState]
+  newStates = [newInitState]
+  newFinalStates = set()
+  newDelta = {}
+  statesMap = {}
+
+  pIndex = 0
+  while pIndex < len(newStates) :
+    P = newStates[pIndex]
+    for s in symbols :
+      Q = set()
+      for p in P :
+        if (p,s) in delta :
+          Q.update(delta[(p,s)])
+      newQ = Q.copy()
+      for q in Q :
+        newQ.update(eClosures[q])
+
+      newState = frozenset(newQ)
+      if not(newState in newStates) :
+        newStates.append(newState)
+      
+      newDelta[(P,s)] = newState
+    if len(finalStates.intersection(P)) > 0 :
+      newFinalStates.add(P)
+
+    statesMap[P]="qd%d"%pIndex
+    pIndex+=1
+
+  initState = statesMap[newInitState]
+  states = set(map(statesMap.get,newStates))
+  finalStates = set(map(statesMap.get,newFinalStates))
+  delta={}
+  for newQ in newStates :
+    for s in symbols :
+      if (newQ, s) in newDelta :
+        delta[(statesMap[newQ],s)]=statesMap[newDelta[(newQ,s)]]
+  
+  if DEBUG : printNfa('converted DFA')
+
   minimize()
+
+  if DEBUG : printNfa('minimized DFA')
+
 def isFinal(state): # predicate for check final states
   return state in finalStates
+
+def eClose(q) : # ECLOSE from single NFA state
+  queue=[q]
+  closure = set()
+  closure.add(q)
+
+  queueIndex=0
+  while queueIndex < len(queue) :
+    state = queue[queueIndex]
+    if (state,'E') in delta :
+      for q2 in delta[(state,'E')] :
+        if not(q2 in closure) :
+          queue.append(q2)
+          closure.add(q2)
+    queueIndex+=1
+  return frozenset(closure)
 
 def groupEClosures():
   global states, delta, initState, finalStates
@@ -134,8 +200,7 @@ def groupEClosures():
 
     queueIndex+=1
 
-  if DEBUG :
-    print("eclosures : %s"%eclosures)
+  if DEBUG : print("eclosures : %s"%eclosures)
 
   #Build new states after grouping epsilon closure
   i=0
@@ -144,9 +209,6 @@ def groupEClosures():
     newStates.update(set([newState]))
     for q in eclosures[i] :
       statesMap[q]=newState
-  if DEBUG :
-    print("new States : %s"%newStates)
-    print("new States map : %s"%statesMap)
   
   #Accumulate delta to newDelta
   for p in delta.keys() :
@@ -158,14 +220,10 @@ def groupEClosures():
         newDelta[(statesMap[q],s)]=set([statesMap[q2]])
       else :
         newDelta[(statesMap[q],s)].add(statesMap[q2])
-  if DEBUG : print("new delta : %s"%newDelta)
   
   newInitState=statesMap[initState]
   for f in finalStates :
     newFinalStates.add(statesMap[f])
-  if DEBUG :
-    print("newInitState : %s"%newInitState)
-    print("newFinalStates : %s"%newFinalStates)
 
   states, delta, initState, finalStates = newStates, newDelta, newInitState, newFinalStates
   if DEBUG : printNfa()
@@ -250,8 +308,8 @@ def subsetConstruction() :
 partitions=[]
 def minimize() :
   global partitions
+  global states, delta, initState, finalStates
   symbolsTuple=tuple(symbols)
-  print(symbolsTuple)
   
   partitions.append(frozenset(finalStates))
   partitions.append(frozenset(states.difference(finalStates)))
@@ -267,10 +325,6 @@ def minimize() :
     for s in symbolsTuple :
       tempList.append( indexAmongPartitions(delta[(q,s)]) )
     return tuple(tempList)
-  global states, delta, iniState, finalStates
-  
-  if DEBUG :
-    print("partitions : %s"%partitions)
 
   distinguished=True
   while distinguished :
@@ -294,6 +348,31 @@ def minimize() :
           tempIndexes=indexesAmongPartitions(state)
       newPartitions.add(frozenset(tempPart))
     partitions=list(newPartitions)
+
+  partitionsMap={}
+  for i in range(len(partitions)) :
+    partitionsMap[partitions[i]]="qm%d"%i
+  
+  newInitState = initState
+  newFinalStates = set()
+  newStates = set()
+  newDelta = {}
   for part in partitions :
-    print(part)
-  print("min_states : %d"%len(partitions))
+    newStates.add(partitionsMap[part])
+    if initState in part :
+      newInitState = partitionsMap[part]
+    if len(finalStates.intersection(part))>0 :
+      newFinalStates.add(partitionsMap[part])
+
+    q=list(part)[0]
+    for s in symbols :
+      if (q, s) in delta :
+        q2 = delta[(q,s)]
+        for part2 in partitions :
+          if q2 in part2 :
+            newDelta[(partitionsMap[part],s)] = partitionsMap[part2]
+
+  initState=newInitState
+  finalStates=newFinalStates
+  states=newStates
+  delta=newDelta
