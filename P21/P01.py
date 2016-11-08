@@ -3,7 +3,7 @@
 DEBUG=False # flag for debug printing.
 
 import sys
-sys.path.append("../")
+sys.path.append("./")
 
 dfaFilePath=""
 inputFilePath=""
