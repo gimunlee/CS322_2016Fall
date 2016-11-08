@@ -44,43 +44,49 @@ nfa.read(eNfaFilePath)
 outputFile=open(outputFilePath,'w')
 inputFile=open(inputFilePath,'r')
 
+#Traverse with e-nfa description using back-tracking
 for line in inputFile.readlines() :
-  if line[:3] == 'end' : break
-  def track(state, restStr) :
+  if line[:3] == 'end' : break # Last line
+  if DEBUG: print(line[:-1])
+  def track(state, restStr) : # Recursive function. Return True when restStr is accepted from state
     global nfa
-    if len(restStr)==0 :
-      if nfa.isFinal(state) : return True
+    if len(restStr)==0 : #After the last character,
+      if nfa.isFinal(state) : return True # if it is final state, it is accepted.
       else : return 'Not Final'
-    if (state, 'E') in nfa.delta :
+    if (state, 'E') in nfa.delta : # Traverse epsilon transitions
       for q2 in nfa.delta[(state,'E')] :
         t=track(q2,restStr)
         if t==True : return True
-    if (state, restStr[0]) in nfa.delta :
+    if (state, restStr[0]) in nfa.delta : # Traverse character transitions
       for q2 in nfa.delta[(state,restStr[0])] :
         t = track(q2,restStr[1:])
         if t==True : return True
     return 'No Transition'
-  if track(nfa.initState, line[:-1])==True :
+  if track(nfa.initState, line[:-1])==True : # Start back-tracking with line-ending-deleted string
+    if DEBUG: print("네")
     outputFile.write("네\n")
   else :
+    if DEBUG: print("아니오")
     outputFile.write("아니오\n")
 outputFile.close()
 inputFile.close()
 
-nfa.convert()
-
-mDfaFile=open(mDfaFilePath,'w')
-mDfaFile.write(nfa.toString())
-mDfaFile.close()
-
 # removing last new line 
-outputFile=open(outputFilePath,'r')
+outputFile=open(outputFilePath,'r') 
 buffer=outputFile.read()
 outputFile.close()
 
 outputFile=open(outputFilePath,'w')
 outputFile.write(buffer[:-1])
 outputFile.close()
+
+# Convert e-nfa to m-dfa. Converted info is also stored in nfa. It substitutes the older one.
+nfa.convert() 
+
+# Wrtie m-DFA description
+mDfaFile=open(mDfaFilePath,'w') 
+mDfaFile.write(nfa.toString())
+mDfaFile.close()
 
 import os
 print("python P01.py --input %s --output %s --dfa %s"%(inputFilePath,"mdfa%s"%(outputFilePath,),mDfaFilePath))

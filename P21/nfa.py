@@ -13,6 +13,7 @@ initState=""
 finalStates=set()
 eclosures=[]
 
+# Output description of m-dfa
 def toString() :
   outputs=[]
   outputs.append("State")
@@ -32,6 +33,7 @@ def toString() :
   outputs.append(','.join(finalStates))
   return '\n'.join(outputs)
 
+#for debugging
 def printNfa(prompt="NFA") :
   print("==%s=="%prompt)
   print("init : %s"%initState)
@@ -106,13 +108,30 @@ def read(nfaPath):
   f.close()
   if DEBUG: printNfa('Read e-NFA')
 
+# Converting e-nfa to m-dfa. Subset construction with e-closures and minimization
 def convert() :
   global states, initState, finalStates, delta
   eClosures={}
+  def eClose(q) : # ECLOSE from single NFA state
+    queue=[q]
+    closure = set()
+    closure.add(q)
+
+    queueIndex=0
+    while queueIndex < len(queue) :
+      state = queue[queueIndex]
+      if (state,'E') in delta :
+        for q2 in delta[(state,'E')] :
+          if not(q2 in closure) :
+            queue.append(q2)
+            closure.add(q2)
+      queueIndex+=1
+    return frozenset(closure)
   for q in states :
     eClosures[q]=eClose(q)
   if DEBUG: print("EClosures : %s"%str(eClosures))
 
+  #Subset construction with e-closures
   newInitState = eClosures[initState]
   newStates = [newInitState]
   newFinalStates = set()
@@ -132,19 +151,17 @@ def convert() :
         newQ.update(eClosures[q])
 
       newState = frozenset(newQ)
-      if not(newState in newStates) :
-        newStates.append(newState)
-      
+      if not(newState in newStates) : newStates.append(newState) # Enlist newly recognized State
       newDelta[(P,s)] = newState
-    if len(finalStates.intersection(P)) > 0 :
-      newFinalStates.add(P)
+    if len(finalStates.intersection(P)) > 0 : newFinalStates.add(P) # Enlist as a final State
 
-    if P == frozenset() :
-      statesMap[P]=DEAD_STATE
-    else :
-      statesMap[P]="qd%d"%pIndex
+    # Numbering new states from subset construction
+    if P == frozenset() : statesMap[P]=DEAD_STATE 
+    else : statesMap[P]="qd%d"%pIndex
+
     pIndex+=1
 
+  # Overwriting
   initState = statesMap[newInitState]
   states = set(map(statesMap.get,newStates))
   finalStates = set(map(statesMap.get,newFinalStates))
@@ -156,28 +173,12 @@ def convert() :
   
   if DEBUG : printNfa('converted DFA')
 
-  minimize()
+  minimize() # Minimizing DFA
 
   if DEBUG : printNfa('minimized DFA')
 
 def isFinal(state): # predicate for check final states
   return state in finalStates
-
-def eClose(q) : # ECLOSE from single NFA state
-  queue=[q]
-  closure = set()
-  closure.add(q)
-
-  queueIndex=0
-  while queueIndex < len(queue) :
-    state = queue[queueIndex]
-    if (state,'E') in delta :
-      for q2 in delta[(state,'E')] :
-        if not(q2 in closure) :
-          queue.append(q2)
-          closure.add(q2)
-    queueIndex+=1
-  return frozenset(closure)
 
 partitions=[]
 def minimize() :
@@ -185,6 +186,7 @@ def minimize() :
   global states, delta, initState, finalStates
   symbolsTuple=tuple(symbols)
   
+  #Initial partition.
   partitions.append(frozenset(finalStates))
   if DEAD_STATE in states : partitions.append(DEAD_STATE_SET)
   partitions.append(frozenset(states.difference(finalStates).difference(DEAD_STATE_SET)))
@@ -201,6 +203,7 @@ def minimize() :
       tempList.append( indexAmongPartitions(delta[(q,s)]) )
     return tuple(tempList)
 
+  #Repeat until any more distinguishable partition not appears
   distinguished=True
   while distinguished :
     distinguished=False
@@ -215,35 +218,32 @@ def minimize() :
       tempPart.add(partList[0])
       tempIndexes=indexesAmongPartitions(partList[0])
       for state in partList[1:] :
-        if tempIndexes == indexesAmongPartitions(state) :
+        if tempIndexes == indexesAmongPartitions(state) : # Existing indexes. not distinguishable yet
           tempPart.add(state)
-        else :
+        else : # distinguishable indexes found.
           distinguished=True
-          newPartitions.add(frozenset(tempPart))
+          newPartitions.add(frozenset(tempPart)) # enlist distinguishable
           tempPart.clear()
           tempPart.add(state)
           tempIndexes=indexesAmongPartitions(state)
-      newPartitions.add(frozenset(tempPart))
+      newPartitions.add(frozenset(tempPart)) # preserve last partition
     partitions=list(newPartitions)
   if DEBUG:  print(partitions)
 
+  # Numbering remained partitions
   partitionsMap={}
   for i in range(len(partitions)) :
-    if partitions[i]==DEAD_STATE_SET :
-      partitionsMap[partitions[i]]=DEAD_STATE
-    else :
-      partitionsMap[partitions[i]]="qm%d"%i
+    if partitions[i]==DEAD_STATE_SET : partitionsMap[partitions[i]]=DEAD_STATE
+    else : partitionsMap[partitions[i]]="qm%d"%i
   
   newInitState = initState
   newFinalStates = set()
   newStates = set()
   newDelta = {}
   for part in partitions :
-    if partitionsMap[part] == DEAD_STATE :
-      continue
+    if partitionsMap[part] == DEAD_STATE : continue # constructing new delta, except dead state
     newStates.add(partitionsMap[part])
-    if initState in part :
-      newInitState = partitionsMap[part]
+    if initState in part : newInitState = partitionsMap[part]
     if len(finalStates.intersection(part))>0 :
       newFinalStates.add(partitionsMap[part])
 
@@ -251,10 +251,8 @@ def minimize() :
     for s in symbols :
       if (q, s) in delta :
         q2 = delta[(q,s)]
-        if q2 == DEAD_STATE :
-          continue
+        if q2 == DEAD_STATE : continue #except dead state
         for part2 in partitions :
-          if q2 in part2 :
-            newDelta[(partitionsMap[part],s)] = partitionsMap[part2]
+          if q2 in part2 : newDelta[(partitionsMap[part],s)] = partitionsMap[part2]
 
   initState, finalStates, states, delta = newInitState, newFinalStates, newStates, newDelta
