@@ -3,6 +3,9 @@ __name__="nfa"
 import __main__
 DEBUG=__main__.DEBUG #debug flag is migrated
 
+DEAD_STATE = 'dead_state'
+DEAD_STATE_SET = frozenset([DEAD_STATE])
+
 states=set()
 symbols=set()
 delta={}
@@ -136,7 +139,10 @@ def convert() :
     if len(finalStates.intersection(P)) > 0 :
       newFinalStates.add(P)
 
-    statesMap[P]="qd%d"%pIndex
+    if P == frozenset() :
+      statesMap[P]=DEAD_STATE
+    else :
+      statesMap[P]="qd%d"%pIndex
     pIndex+=1
 
   initState = statesMap[newInitState]
@@ -180,7 +186,8 @@ def minimize() :
   symbolsTuple=tuple(symbols)
   
   partitions.append(frozenset(finalStates))
-  partitions.append(frozenset(states.difference(finalStates)))
+  if DEAD_STATE in states : partitions.append(DEAD_STATE_SET)
+  partitions.append(frozenset(states.difference(finalStates).difference(DEAD_STATE_SET)))
 
   def indexAmongPartitions(q) :
     global partitions
@@ -199,6 +206,8 @@ def minimize() :
     distinguished=False
     newPartitions=set()
     for part in partitions :
+      if len(part) ==0 :
+        continue
       partList=list(part)
       partList.sort(key=indexesAmongPartitions)
 
@@ -220,13 +229,18 @@ def minimize() :
 
   partitionsMap={}
   for i in range(len(partitions)) :
-    partitionsMap[partitions[i]]="qm%d"%i
+    if partitions[i]==DEAD_STATE_SET :
+      partitionsMap[partitions[i]]=DEAD_STATE
+    else :
+      partitionsMap[partitions[i]]="qm%d"%i
   
   newInitState = initState
   newFinalStates = set()
   newStates = set()
   newDelta = {}
   for part in partitions :
+    if partitionsMap[part] == DEAD_STATE :
+      continue
     newStates.add(partitionsMap[part])
     if initState in part :
       newInitState = partitionsMap[part]
@@ -237,6 +251,8 @@ def minimize() :
     for s in symbols :
       if (q, s) in delta :
         q2 = delta[(q,s)]
+        if q2 == DEAD_STATE :
+          continue
         for part2 in partitions :
           if q2 in part2 :
             newDelta[(partitionsMap[part],s)] = partitionsMap[part2]

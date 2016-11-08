@@ -23,6 +23,28 @@
             ]
         },
         {
+            "name": "PythonP21_01",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/P21/P01.py",
+            "args": ["--input",
+                "./input.txt",
+                "--output",
+                "./output.txt",
+                "--dfa",
+                "test-m-dfa.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "Python",
             "type": "python",
             "request": "launch",
@@ -52,9 +74,9 @@
             "pythonPath": "python",
             "program": "${workspaceRoot}/P21/P21.py",
             "args": ["--enfa",
-                "./e-nfa.txt",
+                "./test-e-nfa.txt",
                 "--mdfa",
-                "./m-dfa.txt",
+                "./test-m-dfa.txt",
                 "--input",
                 "./input.txt",
                 "--output",

@@ -52,10 +52,13 @@ for line in inputFile.readlines() :
     else :
       if DEBUG : print("no transition")
       if DEBUG :
-        if dfa.isFinal(currentState) : print("네")
-        else : print("아니오")
-      if dfa.isFinal(currentState) : outputFile.write("네\n")
-      else : outputFile.write("아니오\n")
+        # if dfa.isFinal(currentState) : print("네")
+        # else : print("아니오")
+        print("아니오")
+      # if dfa.isFinal(currentState) : outputFile.write("네\n")
+      # else : outputFile.write("아니오\n")
+      # break
+      outputFile.write("아니오\n")
       break
 outputFile.close()
 inputFile.close()
