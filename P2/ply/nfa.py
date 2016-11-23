@@ -6,6 +6,8 @@ DEBUG=__main__.DEBUG #debug flag is migrated
 DEAD_STATE = 'dead_state'
 DEAD_STATE_SET = frozenset([DEAD_STATE])
 
+EPSILON = 'EPSILON'
+
 states=set()
 symbols=set()
 delta={}
@@ -133,8 +135,8 @@ def convert() :
     queueIndex=0
     while queueIndex < len(queue) :
       state = queue[queueIndex]
-      if (state,'EE') in delta :
-        for q2 in delta[(state,'EE')] :
+      if (state,EPSILON) in delta :
+        for q2 in delta[(state,EPSILON)] :
           if not(q2 in closure) :
             queue.append(q2)
             closure.add(q2)

@@ -1,10 +1,8 @@
 State
 qm0
 Input symbol
-a
+1
 State transition function
-qm0,a,qm0
 Initial state
 qm0
 Final state
-qm0

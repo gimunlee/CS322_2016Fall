@@ -45,6 +45,26 @@
             ]
         },
         {
+            "name": "PythonP2",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/P2/ply/P2.py",
+            "args": ["--re",
+                "./re.txt",
+                "--mdfa",
+                "./mdfa.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "Python",
             "type": "python",
             "request": "launch",

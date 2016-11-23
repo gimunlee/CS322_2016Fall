@@ -3,274 +3,209 @@ Created by PLY version 3.9 (http://www.dabeaz.com/ply)
 Grammar
 
 Rule 0     S' -> expr
-Rule 1     expr -> expr expr
-Rule 2     expr -> CHAR
-Rule 3     expr -> expr DASH expr
-Rule 4     expr -> expr STAR
-Rule 5     expr -> expr UNION expr
-Rule 6     expr -> LPAREN expr RPAREN
-Rule 7     statement -> expr
+Rule 1     expr -> chunk
+Rule 2     expr -> expr UNION chunk
+Rule 3     chunk -> term
+Rule 4     chunk -> chunk term
+Rule 5     term -> CHAR
+Rule 6     term -> term STAR
+Rule 7     term -> LPAREN expr RPAREN
+Rule 8     term -> LPAREN RPAREN
 
 Terminals, with rules where they appear
 
-CHAR                 : 2
-DASH                 : 3
-LPAREN               : 6
-RPAREN               : 6
-STAR                 : 4
-UNION                : 5
+CHAR                 : 5
+LPAREN               : 7 8
+RPAREN               : 7 8
+STAR                 : 6
+UNION                : 2
 error                : 
 
 Nonterminals, with rules where they appear
 
-expr                 : 1 1 3 3 4 5 5 6 7 0
-statement            : 
+chunk                : 1 2 4
+expr                 : 2 7 0
+term                 : 3 4 6
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (1) expr -> . chunk
+    (2) expr -> . expr UNION chunk
+    (3) chunk -> . term
+    (4) chunk -> . chunk term
+    (5) term -> . CHAR
+    (6) term -> . term STAR
+    (7) term -> . LPAREN expr RPAREN
+    (8) term -> . LPAREN RPAREN
 
-    CHAR            shift and go to state 3
+    CHAR            shift and go to state 4
     LPAREN          shift and go to state 2
 
+    chunk                          shift and go to state 3
+    term                           shift and go to state 5
     expr                           shift and go to state 1
 
 state 1
 
     (0) S' -> expr .
-    (1) expr -> expr . expr
-    (3) expr -> expr . DASH expr
-    (4) expr -> expr . STAR
-    (5) expr -> expr . UNION expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (2) expr -> expr . UNION chunk
 
-    DASH            shift and go to state 5
-    STAR            shift and go to state 7
     UNION           shift and go to state 6
-    CHAR            shift and go to state 3
-    LPAREN          shift and go to state 2
 
-    expr                           shift and go to state 4
 
 state 2
 
-    (6) expr -> LPAREN . expr RPAREN
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (7) term -> LPAREN . expr RPAREN
+    (8) term -> LPAREN . RPAREN
+    (1) expr -> . chunk
+    (2) expr -> . expr UNION chunk
+    (3) chunk -> . term
+    (4) chunk -> . chunk term
+    (5) term -> . CHAR
+    (6) term -> . term STAR
+    (7) term -> . LPAREN expr RPAREN
+    (8) term -> . LPAREN RPAREN
 
-    CHAR            shift and go to state 3
+    RPAREN          shift and go to state 8
+    CHAR            shift and go to state 4
     LPAREN          shift and go to state 2
 
-    expr                           shift and go to state 8
+    chunk                          shift and go to state 3
+    term                           shift and go to state 5
+    expr                           shift and go to state 7
 
 state 3
 
-    (2) expr -> CHAR .
+    (1) expr -> chunk .
+    (4) chunk -> chunk . term
+    (5) term -> . CHAR
+    (6) term -> . term STAR
+    (7) term -> . LPAREN expr RPAREN
+    (8) term -> . LPAREN RPAREN
 
-    DASH            reduce using rule 2 (expr -> CHAR .)
-    STAR            reduce using rule 2 (expr -> CHAR .)
-    UNION           reduce using rule 2 (expr -> CHAR .)
-    CHAR            reduce using rule 2 (expr -> CHAR .)
-    LPAREN          reduce using rule 2 (expr -> CHAR .)
-    $end            reduce using rule 2 (expr -> CHAR .)
-    RPAREN          reduce using rule 2 (expr -> CHAR .)
+    UNION           reduce using rule 1 (expr -> chunk .)
+    $end            reduce using rule 1 (expr -> chunk .)
+    RPAREN          reduce using rule 1 (expr -> chunk .)
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 2
 
+    term                           shift and go to state 9
 
 state 4
 
-    (1) expr -> expr expr .
-    (1) expr -> expr . expr
-    (3) expr -> expr . DASH expr
-    (4) expr -> expr . STAR
-    (5) expr -> expr . UNION expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (5) term -> CHAR .
 
-  ! shift/reduce conflict for DASH resolved as shift
-  ! shift/reduce conflict for STAR resolved as shift
-  ! shift/reduce conflict for UNION resolved as shift
-  ! shift/reduce conflict for CHAR resolved as shift
-  ! shift/reduce conflict for LPAREN resolved as shift
-    $end            reduce using rule 1 (expr -> expr expr .)
-    RPAREN          reduce using rule 1 (expr -> expr expr .)
-    DASH            shift and go to state 5
-    STAR            shift and go to state 7
-    UNION           shift and go to state 6
-    CHAR            shift and go to state 3
-    LPAREN          shift and go to state 2
+    STAR            reduce using rule 5 (term -> CHAR .)
+    CHAR            reduce using rule 5 (term -> CHAR .)
+    LPAREN          reduce using rule 5 (term -> CHAR .)
+    RPAREN          reduce using rule 5 (term -> CHAR .)
+    UNION           reduce using rule 5 (term -> CHAR .)
+    $end            reduce using rule 5 (term -> CHAR .)
 
-  ! DASH            [ reduce using rule 1 (expr -> expr expr .) ]
-  ! STAR            [ reduce using rule 1 (expr -> expr expr .) ]
-  ! UNION           [ reduce using rule 1 (expr -> expr expr .) ]
-  ! CHAR            [ reduce using rule 1 (expr -> expr expr .) ]
-  ! LPAREN          [ reduce using rule 1 (expr -> expr expr .) ]
-
-    expr                           shift and go to state 4
 
 state 5
 
-    (3) expr -> expr DASH . expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (3) chunk -> term .
+    (6) term -> term . STAR
 
-    CHAR            shift and go to state 3
-    LPAREN          shift and go to state 2
+    CHAR            reduce using rule 3 (chunk -> term .)
+    LPAREN          reduce using rule 3 (chunk -> term .)
+    UNION           reduce using rule 3 (chunk -> term .)
+    $end            reduce using rule 3 (chunk -> term .)
+    RPAREN          reduce using rule 3 (chunk -> term .)
+    STAR            shift and go to state 10
 
-    expr                           shift and go to state 9
 
 state 6
 
-    (5) expr -> expr UNION . expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (2) expr -> expr UNION . chunk
+    (3) chunk -> . term
+    (4) chunk -> . chunk term
+    (5) term -> . CHAR
+    (6) term -> . term STAR
+    (7) term -> . LPAREN expr RPAREN
+    (8) term -> . LPAREN RPAREN
 
-    CHAR            shift and go to state 3
+    CHAR            shift and go to state 4
     LPAREN          shift and go to state 2
 
-    expr                           shift and go to state 10
+    chunk                          shift and go to state 11
+    term                           shift and go to state 5
 
 state 7
 
-    (4) expr -> expr STAR .
+    (7) term -> LPAREN expr . RPAREN
+    (2) expr -> expr . UNION chunk
 
-    DASH            reduce using rule 4 (expr -> expr STAR .)
-    STAR            reduce using rule 4 (expr -> expr STAR .)
-    UNION           reduce using rule 4 (expr -> expr STAR .)
-    CHAR            reduce using rule 4 (expr -> expr STAR .)
-    LPAREN          reduce using rule 4 (expr -> expr STAR .)
-    $end            reduce using rule 4 (expr -> expr STAR .)
-    RPAREN          reduce using rule 4 (expr -> expr STAR .)
+    RPAREN          shift and go to state 12
+    UNION           shift and go to state 6
 
 
 state 8
 
-    (6) expr -> LPAREN expr . RPAREN
-    (1) expr -> expr . expr
-    (3) expr -> expr . DASH expr
-    (4) expr -> expr . STAR
-    (5) expr -> expr . UNION expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (8) term -> LPAREN RPAREN .
 
-    RPAREN          shift and go to state 11
-    DASH            shift and go to state 5
-    STAR            shift and go to state 7
-    UNION           shift and go to state 6
-    CHAR            shift and go to state 3
-    LPAREN          shift and go to state 2
+    STAR            reduce using rule 8 (term -> LPAREN RPAREN .)
+    CHAR            reduce using rule 8 (term -> LPAREN RPAREN .)
+    LPAREN          reduce using rule 8 (term -> LPAREN RPAREN .)
+    RPAREN          reduce using rule 8 (term -> LPAREN RPAREN .)
+    UNION           reduce using rule 8 (term -> LPAREN RPAREN .)
+    $end            reduce using rule 8 (term -> LPAREN RPAREN .)
 
-    expr                           shift and go to state 4
 
 state 9
 
-    (3) expr -> expr DASH expr .
-    (1) expr -> expr . expr
-    (3) expr -> expr . DASH expr
-    (4) expr -> expr . STAR
-    (5) expr -> expr . UNION expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (4) chunk -> chunk term .
+    (6) term -> term . STAR
 
-    DASH            reduce using rule 3 (expr -> expr DASH expr .)
-    UNION           reduce using rule 3 (expr -> expr DASH expr .)
-    CHAR            reduce using rule 3 (expr -> expr DASH expr .)
-    LPAREN          reduce using rule 3 (expr -> expr DASH expr .)
-    $end            reduce using rule 3 (expr -> expr DASH expr .)
-    RPAREN          reduce using rule 3 (expr -> expr DASH expr .)
-    STAR            shift and go to state 7
+    CHAR            reduce using rule 4 (chunk -> chunk term .)
+    LPAREN          reduce using rule 4 (chunk -> chunk term .)
+    UNION           reduce using rule 4 (chunk -> chunk term .)
+    $end            reduce using rule 4 (chunk -> chunk term .)
+    RPAREN          reduce using rule 4 (chunk -> chunk term .)
+    STAR            shift and go to state 10
 
-  ! STAR            [ reduce using rule 3 (expr -> expr DASH expr .) ]
-  ! DASH            [ shift and go to state 5 ]
-  ! UNION           [ shift and go to state 6 ]
-  ! CHAR            [ shift and go to state 3 ]
-  ! LPAREN          [ shift and go to state 2 ]
-
-    expr                           shift and go to state 4
 
 state 10
 
-    (5) expr -> expr UNION expr .
-    (1) expr -> expr . expr
-    (3) expr -> expr . DASH expr
-    (4) expr -> expr . STAR
-    (5) expr -> expr . UNION expr
-    (1) expr -> . expr expr
-    (2) expr -> . CHAR
-    (3) expr -> . expr DASH expr
-    (4) expr -> . expr STAR
-    (5) expr -> . expr UNION expr
-    (6) expr -> . LPAREN expr RPAREN
+    (6) term -> term STAR .
 
-    UNION           reduce using rule 5 (expr -> expr UNION expr .)
-    CHAR            reduce using rule 5 (expr -> expr UNION expr .)
-    LPAREN          reduce using rule 5 (expr -> expr UNION expr .)
-    $end            reduce using rule 5 (expr -> expr UNION expr .)
-    RPAREN          reduce using rule 5 (expr -> expr UNION expr .)
-    DASH            shift and go to state 5
-    STAR            shift and go to state 7
+    STAR            reduce using rule 6 (term -> term STAR .)
+    CHAR            reduce using rule 6 (term -> term STAR .)
+    LPAREN          reduce using rule 6 (term -> term STAR .)
+    RPAREN          reduce using rule 6 (term -> term STAR .)
+    UNION           reduce using rule 6 (term -> term STAR .)
+    $end            reduce using rule 6 (term -> term STAR .)
 
-  ! DASH            [ reduce using rule 5 (expr -> expr UNION expr .) ]
-  ! STAR            [ reduce using rule 5 (expr -> expr UNION expr .) ]
-  ! UNION           [ shift and go to state 6 ]
-  ! CHAR            [ shift and go to state 3 ]
-  ! LPAREN          [ shift and go to state 2 ]
-
-    expr                           shift and go to state 4
 
 state 11
 
-    (6) expr -> LPAREN expr RPAREN .
+    (2) expr -> expr UNION chunk .
+    (4) chunk -> chunk . term
+    (5) term -> . CHAR
+    (6) term -> . term STAR
+    (7) term -> . LPAREN expr RPAREN
+    (8) term -> . LPAREN RPAREN
 
-    DASH            reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    STAR            reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    UNION           reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    CHAR            reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    LPAREN          reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    $end            reduce using rule 6 (expr -> LPAREN expr RPAREN .)
-    RPAREN          reduce using rule 6 (expr -> LPAREN expr RPAREN .)
+    UNION           reduce using rule 2 (expr -> expr UNION chunk .)
+    $end            reduce using rule 2 (expr -> expr UNION chunk .)
+    RPAREN          reduce using rule 2 (expr -> expr UNION chunk .)
+    CHAR            shift and go to state 4
+    LPAREN          shift and go to state 2
 
-WARNING: 
-WARNING: Conflicts:
-WARNING: 
-WARNING: shift/reduce conflict for DASH in state 4 resolved as shift
-WARNING: shift/reduce conflict for STAR in state 4 resolved as shift
-WARNING: shift/reduce conflict for UNION in state 4 resolved as shift
-WARNING: shift/reduce conflict for CHAR in state 4 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 4 resolved as shift
+    term                           shift and go to state 9
+
+state 12
+
+    (7) term -> LPAREN expr RPAREN .
+
+    STAR            reduce using rule 7 (term -> LPAREN expr RPAREN .)
+    CHAR            reduce using rule 7 (term -> LPAREN expr RPAREN .)
+    LPAREN          reduce using rule 7 (term -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 7 (term -> LPAREN expr RPAREN .)
+    UNION           reduce using rule 7 (term -> LPAREN expr RPAREN .)
+    $end            reduce using rule 7 (term -> LPAREN expr RPAREN .)
+
