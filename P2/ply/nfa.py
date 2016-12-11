@@ -168,7 +168,10 @@ def convert() :
       newState = frozenset(newQ)
       if not(newState in newStates) : newStates.append(newState) # Enlist newly recognized State
       newDelta[(P,s)] = newState
-    if len(finalStates.intersection(P)) > 0 : newFinalStates.add(P) # Enlist as a final State
+    
+    if len(finalStates.intersection(P)) > 0 :
+      if DEBUG: print(P)
+      newFinalStates.add(P) # Enlist as a final State
 
     # Numbering new states from subset construction
     if P == frozenset() : statesMap[P]=DEAD_STATE 

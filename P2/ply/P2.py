@@ -1,4 +1,6 @@
 #-*- coding: utf-8 -*-
+# Python version : 3.5.2
+# PLY version : 3.9
 DEBUG = False
 
 ######################
@@ -16,6 +18,9 @@ DEBUG = False
 ###############################################
 # Lexer code
 ###############################################
+
+EPSILON = 'EPSILON' # 'EPSILON' for epsilon transition
+
 tokens = (
     'CHAR',
     'STAR', 'LPAREN', 'RPAREN','UNION',
@@ -82,7 +87,7 @@ def p_term_group(p):
 #epsilon for empty string
 def p_term_epsilon(p):
     'term : LPAREN RPAREN'
-    p[0] = ('EE',)
+    p[0] = (EPSILON,)
 # def p_epsilon_parens(p):
 #     'epsilon : LPAREN RPAREN'
 #     p[0]='Empty String'
@@ -111,17 +116,22 @@ def quitWithHelp(causeStr="") :
   print(causeStr)
   print("="*10)
   print("Running Policy of P2 : python P2.py --re [RE file path] --mdfa [m-dfa output file path]")
-  print("    Given output file path is for e-nfa")
   print("    Generated m-dfa will output to \"mdfa[outputFilePath]\" ")
+  print("   With --command 1 option, you can input with std input")
   quit(-1)
 
 reFilePath=""
 mDfaFilePath=""
+isCommand=False
 # flag for path of re and mdfa file
 if '--re' in sys.argv : reFilePath=sys.argv[sys.argv.index('--re')+1]
 else : quitWithHelp("The path of regular expression file not found") 
 if '--mdfa' in sys.argv : mDfaFilePath=sys.argv[sys.argv.index('--mdfa')+1]
 else : quitWithHelp('The path for output m-DFA description file not found')
+
+# flag for command line mode
+if '--command' in sys.argv :
+    if sys.argv[sys.argv.index('--command')+1] == '1' : isCommand=True
 
 # flag for debug printing option. 0 for off, 1 for on
 if '--debug' in sys.argv :
@@ -131,9 +141,13 @@ if '--debug' in sys.argv :
 ##########################################
 ## Initiate Parsing
 try:
-    reFile = open(reFilePath,'r')
-    s = reFile.readline()
-    reFile.close()
+    s=''
+    if isCommand :
+        s = input('')
+    else :
+        reFile = open(reFilePath,'r')
+        s = reFile.readline()
+        reFile.close()
     # s = input('expression : ')
     if s == '\n' or s == '':
         raise EOFError
@@ -146,7 +160,6 @@ ast = yacc.parse(s)
 ## Construct E-NFA 
 nfaStates=set()
 nfaSymbols=set()
-EPSILON = 'EE' # 'EE' for epsilon transition
 nfaDelta={}
 
 def constructENfa(ast):

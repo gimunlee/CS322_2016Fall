@@ -1,8 +1,13 @@
 State
-qm0
+qm1,qm0,qm2,qm4
 Input symbol
-1
+a,1,c,b
 State transition function
+qm1,1,qm4
+qm1,a,qm0
+qm2,c,qm4
+qm0,b,qm2
 Initial state
-qm0
+qm1
 Final state
+qm1,qm4
