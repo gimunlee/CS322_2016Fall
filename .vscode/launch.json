@@ -45,6 +45,48 @@
             ]
         },
         {
+            "name": "PythonP2TestDfa",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/P3/P01.py",
+            "args": ["--dfa",
+                "./mdfaVegare.txt",
+                "--input",
+                "./dfainput.txt",
+                "--output",
+                "./dfaoutput.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
+            "name": "PythonP2ForVega",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/P2/ply/P2.py",
+            "args": ["--re",
+                "./vegare.txt",
+                "--mdfa",
+                "../../P3/mdfaVegare.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "PythonP2",
             "type": "python",
             "request": "launch",

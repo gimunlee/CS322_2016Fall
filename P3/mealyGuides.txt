@@ -1,0 +1,19 @@
+State transition function
+Output function
+
+new with prev jong
+
+next는 루프돌 때 쓰기로.
+
+next,cho,ㄱ
+new,cho,ㄱ
+edit,cho,ㄹ
+cat,jung,ㅏ
+new with prev jong,ㅏ
+new with prev split jong,ㅏ
+delete cho and add to prev jong,ㅅ
+delete cho and edit prev jong,ㅂ
+reduce prev jong and new cho,ㅆ
+delete prev jong and new cho,ㅉ
+insert,ㅣ
+fin

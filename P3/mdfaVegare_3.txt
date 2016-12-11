@@ -1,0 +1,1196 @@
+State
+qm9,qm34,qm4,qm51,qm28,qm6,qm36,qm29,qm40,qm21,qm38,qm16,qm37,qm10,qm42,qm25,qm2,qm23,qm32,qm24,qm15,qm39,qm27,qm52,qm53,qm35,qm30,qm3,qm11,qm1,qm8,qm14,qm17,qm43,qm48,qm0,qm19,qm12,qm45,qm7,qm5,qm26,qm31,qm50,qm47,qm46,qm33,qm54,qm44,qm20,qm22,qm18,qm41,qm13
+Input symbol
+3,s,e,a,c,1,x,d,2,!,w,z,q
+##처음
+State transition function
+qm17,s,qm41
+qm17,a,qm6
+qm17,1,qm37
+qm17,x,qm46
+qm17,w,qm1
+qm17,z,qm39
+qm17,q,qm22
+Output function
+qm17,s,new,cho,ㅂ
+qm17,a,new,cho,ㅁ
+qm17,1,new,cho,ㄱ
+qm17,x,new,cho,ㅇ
+qm17,w,new,cho,ㄴ
+qm17,z,new,cho,ㅈ
+qm17,q,new,cho,ㄷ
+##초성 ㅂ
+State transition function
+qm41,3,qm48
+qm41,s,qm41
+qm41,e,qm36
+qm41,c,qm45
+qm41,d,qm38
+qm41,2,qm24
+Output function
+qm41,3,cat,jung,ㅏ
+qm41,s,next,cho,ㅂ
+qm41,e,cat,jung,ㅓ
+qm41,c,cat,jung,ㅜ
+qm41,d,cat,jung,ㅗ
+qm41,2,cat,jung,ㅣ
+##초성 ㅁ
+State transition function
+qm6,3,qm48
+qm6,e,qm36
+qm6,a,qm6
+qm6,c,qm45
+qm6,d,qm38
+qm6,2,qm24
+Output function
+qm6,3,cat,jung,ㅏ
+qm6,e,cat,jung,ㅓ
+qm6,a,next,cho,ㅁ
+qm6,c,cat,jung,ㅜ
+qm6,d,cat,jung,ㅗ
+qm6,2,cat,jung,ㅣ
+##초성 ㄱ
+State transition function
+qm37,3,qm48
+qm37,e,qm36
+qm37,c,qm45
+qm37,1,qm37
+qm37,d,qm38
+qm37,2,qm24
+Output function
+qm37,3,cat,jung,ㅏ
+qm37,e,cat,jung,ㅓ
+qm37,c,cat,jung,ㅜ
+qm37,1,next,cho,ㄱ
+qm37,d,cat,jung,ㅗ
+qm37,2,cat,jung,ㅣ
+##초성 ㅇ
+State transition function
+qm46,3,qm48
+qm46,e,qm36
+qm46,c,qm45
+qm46,x,qm46
+qm46,d,qm38
+qm46,2,qm24
+Output function
+qm46,3,cat,jung,ㅏ
+qm46,e,cat,jung,ㅓ
+qm46,c,cat,jung,ㅜ
+qm46,x,next,cho,ㅇ
+qm46,d,cat,jung,ㅗ
+qm46,2,cat,jung,ㅣ
+##초성 ㄴ
+State transition function
+qm1,3,qm48
+qm1,e,qm36
+qm1,c,qm45
+qm1,d,qm38
+qm1,2,qm24
+qm1,w,qm1
+Output function
+qm1,3,cat,jung,ㅏ
+qm1,e,cat,jung,ㅓ
+qm1,c,cat,jung,ㅜ
+qm1,d,cat,jung,ㅗ
+qm1,2,cat,jung,ㅣ
+qm1,w,next,cho,ㄴ
+##초성 ㅈ
+State transition function
+qm39,3,qm48
+qm39,e,qm36
+qm39,c,qm45
+qm39,d,qm38
+qm39,2,qm24
+qm39,z,qm39
+Output function
+qm39,3,cat,jung,ㅏ
+qm39,e,cat,jung,ㅓ
+qm39,c,cat,jung,ㅜ
+qm39,d,cat,jung,ㅗ
+qm39,2,cat,jung,ㅣ
+qm39,z,next,cho,ㅈ
+##초성 ㄷ
+State transition function
+qm22,3,qm48
+qm22,e,qm36
+qm22,c,qm45
+qm22,d,qm38
+qm22,2,qm24
+qm22,q,qm22
+Output function
+qm22,3,cat,jung,ㅏ
+qm22,e,cat,jung,ㅓ
+qm22,c,cat,jung,ㅜ
+qm22,d,cat,jung,ㅗ
+qm22,2,cat,jung,ㅣ
+qm22,q,next,cho,ㄷ
+##중성 ㅏ,ㅑ
+State transition function
+qm48,3,qm48
+qm48,s,qm54
+qm48,a,qm47
+qm48,1,qm9
+qm48,x,qm10
+qm48,2,qm3
+qm48,!,qm13
+qm48,w,qm33
+qm48,z,qm35
+qm48,q,qm25
+Output function
+qm48,3,next,jung,ㅏ
+qm48,s,cat,jong,ㅂ
+qm48,a,cat,jong,ㅁ
+qm48,1,cat,jong,ㄱ
+qm48,x,cat,jong,ㅇ
+qm48,2,insert,ㅣ
+qm48,!,fin
+qm48,w,cat,jong,ㄴ
+qm48,z,cat,jong,ㅈ
+qm48,q,cat,jong,ㄷ
+##중성 ㅓㅕ
+State transition function
+qm36,s,qm54
+qm36,e,qm36
+qm36,a,qm47
+qm36,1,qm9
+qm36,x,qm10
+qm36,2,qm3
+qm36,!,qm13
+qm36,w,qm33
+qm36,z,qm35
+qm36,q,qm25
+Output function
+qm36,s,cat,jong,ㅂ
+qm36,e,next,jung,ㅓ
+qm36,a,cat,jong,ㅁ
+qm36,1,cat,jong,ㄱ
+qm36,x,cat,jong,ㅇ
+qm36,2,insert,ㅣ
+qm36,!,fin
+qm36,w,cat,jong,ㄴ
+qm36,z,cat,jong,ㅈ
+qm36,q,cat,jong,ㄷ
+##중성 ㅜ
+State transition function
+qm45,s,qm54
+qm45,e,qm53
+qm45,a,qm47
+qm45,c,qm26
+qm45,1,qm9
+qm45,x,qm10
+qm45,2,qm3
+qm45,!,qm13
+qm45,w,qm33
+qm45,z,qm35
+qm45,q,qm25
+Output function
+qm45,s,cat,jong,ㅂ
+qm45,e,edit,jung,ㅝ
+qm45,a,cat,jong,ㅁ
+qm45,c,next,jung,ㅜ
+qm45,1,cat,jong,ㄱ
+qm45,x,cat,jong,ㅇ
+qm45,2,edit,jung,ㅟ
+qm45,!,fin
+qm45,w,cat,jong,ㄴ
+qm45,z,cat,jong,ㅈ
+qm45,q,cat,jong,ㄷ
+##중성 ㅗ
+State transition function
+qm38,3,qm53
+qm38,s,qm54
+qm38,a,qm47
+qm38,1,qm9
+qm38,x,qm10
+qm38,d,qm16
+qm38,2,qm3
+qm38,!,qm13
+qm38,w,qm33
+qm38,z,qm35
+qm38,q,qm25
+Output function
+qm38,3,edit,jung,ㅘ
+qm38,s,cat,jong,ㅂ
+qm38,a,cat,jong,ㅁ
+qm38,1,cat,jong,ㄱ
+qm38,x,cat,jong,ㅇ
+qm38,d,edit,jung,ㅛ
+qm38,2,edit,jung,ㅚ
+qm38,!,fin
+qm38,w,cat,jong,ㄴ
+qm38,z,cat,jong,ㅈ
+qm38,q,cat,jong,ㄷ
+##중성 ㅣ
+State transition function
+qm24,s,qm54
+qm24,a,qm47
+qm24,1,qm9
+qm24,x,qm10
+qm24,2,qm24
+qm24,!,qm13
+qm24,w,qm33
+qm24,z,qm35
+qm24,q,qm25
+Output function
+qm24,s,cat,jong,ㅂ
+qm24,a,cat,jong,ㅁ
+qm24,1,cat,jong,ㄱ
+qm24,x,cat,jong,ㅇ
+qm24,2,next,jung,ㅣ
+qm24,!,fin
+qm24,w,cat,jong,ㄴ
+qm24,z,cat,jong,ㅈ
+qm24,q,cat,jong,ㄷ
+##종성 ㅂ
+State transition function
+qm54,3,qm48
+qm54,s,qm27
+qm54,e,qm36
+qm54,a,qm11
+qm54,c,qm45
+qm54,1,qm37
+qm54,x,qm46
+qm54,d,qm38
+qm54,2,qm24
+qm54,!,qm13
+qm54,w,qm1
+qm54,z,qm39
+qm54,q,qm22
+Output function
+qm54,3,new with prev jong,ㅏ
+qm54,s,new,cho,ㅍ
+qm54,e,new with prev jong,ㅓ
+qm54,a,new,cho,ㅁ
+qm54,c,new with prev jong,ㅜ
+qm54,1,new,cho,ㄱ
+qm54,x,new,cho,ㅇ
+qm54,d,new with prev jong,ㅗ
+qm54,2,new with prev jong,ㅣ
+qm54,!,fin
+qm54,w,new,cho,ㄴ
+qm54,z,new,cho,ㅈ
+qm54,q,new,cho,ㄷ
+##종성 ㅁ
+State transition function
+qm47,3,qm48
+qm47,s,qm41
+qm47,e,qm36
+qm47,a,qm47
+qm47,c,qm45
+qm47,1,qm37
+qm47,x,qm46
+qm47,d,qm38
+qm47,2,qm24
+qm47,!,qm13
+qm47,w,qm1
+qm47,z,qm39
+qm47,q,qm22
+Output function
+qm47,3,new with prev jong,ㅏ
+qm47,s,new,cho,ㅂ
+qm47,e,new with prev jong,ㅓ
+qm47,a,next,jong,ㅁ
+qm47,c,new with prev jong,ㅜ
+qm47,1,new,cho,ㄱ
+qm47,x,new,cho,ㅇ
+qm47,d,new with prev jong,ㅗ
+qm47,2,new with prev jong,ㅣ
+qm47,!,fin
+qm47,w,new,cho,ㄴ
+qm47,z,new,cho,ㅈ
+qm47,q,new,cho,ㄷ
+##종성 ㄱ
+State transition function
+qm9,3,qm48
+qm9,s,qm41
+qm9,e,qm36
+qm9,a,qm11
+qm9,c,qm45
+qm9,1,qm7
+qm9,x,qm46
+qm9,d,qm38
+qm9,2,qm24
+qm9,!,qm13
+qm9,w,qm1
+qm9,z,qm39
+qm9,q,qm22
+Output function
+qm9,3,new with prev jong,ㅏ
+qm9,s,new,cho,ㅂ
+qm9,e,new with prev jong,ㅓ
+qm9,a,new,cho,ㅁ
+qm9,c,new with prev jong,ㅜ
+qm9,1,edit,jong,ㅋ
+qm9,x,new,cho,ㅇ
+qm9,d,new with prev jong,ㅗ
+qm9,2,new with prev jong,ㅣ
+qm9,!,fin
+qm9,w,new,cho,ㄴ
+qm9,z,new,cho,ㅈ
+qm9,q,new,cho,ㄷ
+##종성 ㅇㅎ
+State transition function
+qm10,3,qm48
+qm10,s,qm41
+qm10,e,qm36
+qm10,a,qm6
+qm10,c,qm45
+qm10,1,qm37
+qm10,x,qm10
+qm10,d,qm38
+qm10,2,qm24
+qm10,!,qm13
+qm10,w,qm1
+qm10,z,qm39
+qm10,q,qm22
+Output function
+qm10,3,new with prev jong,ㅏ
+qm10,s,new,cho,ㅂ
+qm10,e,new with prev jong,ㅓ
+qm10,a,new,cho,ㅁ
+qm10,c,new with prev jong,ㅜ
+qm10,1,new,cho,ㄱ
+qm10,x,next,jong,ㅇ
+qm10,d,new with prev jong,ㅗ
+qm10,2,new with prev jong,ㅣ
+qm10,!,fin
+qm10,w,new,cho,ㄴ
+qm10,z,new,cho,ㅈ
+qm10,q,new,cho,ㄷ
+##ㅣ 추가
+State transition function
+qm3,s,qm54
+qm3,a,qm47
+qm3,1,qm9
+qm3,x,qm10
+qm3,!,qm13
+qm3,w,qm33
+qm3,z,qm35
+qm3,q,qm25
+Output function
+qm3,s,cat,jong,ㅂ
+qm3,a,cat,jong,ㅁ
+qm3,1,cat,jong,ㄱ
+qm3,x,cat,jong,ㅇ
+qm3,!,fin
+qm3,w,cat,jong,ㄴ
+qm3,z,cat,jong,ㅈ
+qm3,q,cat,jong,ㄷ
+##글자마침
+State transition function
+qm13,s,qm41
+qm13,a,qm6
+qm13,1,qm37
+qm13,x,qm46
+qm13,!,qm13
+qm13,w,qm1
+qm13,z,qm39
+qm13,q,qm22
+Output function
+qm13,s,new,cho,ㅂ
+qm13,a,new,cho,ㅁ
+qm13,1,new,cho,ㄱ
+qm13,x,new,cho,ㅇ
+qm13,!,fin
+qm13,w,new,cho,ㄴ
+qm13,z,new,cho,ㅈ
+qm13,q,new,cho,ㄷ
+##종성 ㄴ
+State transition function
+qm33,3,qm48
+qm33,s,qm41
+qm33,e,qm36
+qm33,a,qm6
+qm33,c,qm45
+qm33,1,qm37
+qm33,x,qm12
+qm33,d,qm38
+qm33,2,qm24
+qm33,!,qm13
+qm33,w,qm4
+qm33,z,qm8
+qm33,q,qm22
+Output function
+qm33,3,new with prev jong,ㅏ
+qm33,s,new,cho,ㅂ
+qm33,e,new with prev jong,ㅓ
+qm33,a,new,cho,ㅁ
+qm33,c,new with prev jong,ㅜ
+qm33,1,new,cho,ㄱ
+qm33,x,new,cho,ㅇ
+qm33,d,new with prev jong,ㅗ
+qm33,2,new with prev jong,ㅣ
+qm33,!,fin
+qm33,w,next,jong,ㄴ
+qm33,z,edit,jong,ㄵ
+qm33,q,new,cho,ㄷ
+##종성 ㅈ
+State transition function
+qm35,3,qm48
+qm35,s,qm41
+qm35,e,qm36
+qm35,a,qm6
+qm35,c,qm45
+qm35,1,qm37
+qm35,x,qm46
+qm35,d,qm38
+qm35,2,qm24
+qm35,!,qm13
+qm35,w,qm1
+qm35,z,qm31
+qm35,q,qm22
+Output function
+qm35,3,new with prev jong,ㅏ
+qm35,s,new,cho,ㅂ
+qm35,e,new with prev jong,ㅓ
+qm35,a,new,cho,ㅁ
+qm35,c,new with prev jong,ㅜ
+qm35,1,new,cho,ㄱ
+qm35,x,new,cho,ㅇ
+qm35,d,new with prev jong,ㅗ
+qm35,2,new with prev jong,ㅣ
+qm35,!,fin
+qm35,w,new,cho,ㄴ
+qm35,z,edit,jong,ㅊ
+qm35,q,new,cho,ㄷ
+##종성 ㄷ
+State transition function
+qm25,3,qm48
+qm25,s,qm41
+qm25,e,qm36
+qm25,a,qm6
+qm25,c,qm45
+qm25,1,qm37
+qm25,x,qm46
+qm25,d,qm38
+qm25,2,qm24
+qm25,!,qm13
+qm25,w,qm1
+qm25,z,qm39
+qm25,q,qm14
+Output function
+qm25,3,new with prev jong,ㅏ
+qm25,s,new,cho,ㅂ
+qm25,e,new with prev jong,ㅓ
+qm25,a,new,cho,ㅁ
+qm25,c,new with prev jong,ㅜ
+qm25,1,new,cho,ㄱ
+qm25,x,new,cho,ㅇ
+qm25,d,new with prev jong,ㅗ
+qm25,2,new with prev jong,ㅣ
+qm25,!,fin
+qm25,w,new,cho,ㄴ
+qm25,z,new,cho,ㅈ
+qm25,q,edit,jong,ㅌ
+##중성 ㅘㅝ
+State transition function
+qm53,s,qm54
+qm53,a,qm47
+qm53,1,qm9
+qm53,x,qm10
+qm53,2,qm3
+qm53,!,qm13
+qm53,w,qm33
+qm53,z,qm35
+qm53,q,qm25
+Output function
+qm53,s,cat,jong,ㅂ
+qm53,a,cat,jong,ㅁ
+qm53,1,cat,jong,ㄱ
+qm53,x,cat,jong,ㅇ
+qm53,2,insert,ㅣ
+qm53,!,fin
+qm53,w,cat,jong,ㄴ
+qm53,z,cat,jong,ㅈ
+qm53,q,cat,jong,ㄷ
+##중성 ㅠ
+State transition function
+qm26,s,qm54
+qm26,a,qm47
+qm26,c,qm45
+qm26,1,qm9
+qm26,x,qm10
+qm26,!,qm13
+qm26,w,qm33
+qm26,z,qm35
+qm26,q,qm25
+Output function
+qm26,s,cat,jong,ㅂ
+qm26,a,cat,jong,ㅁ
+qm26,c,edit,jung,ㅜ
+qm26,1,cat,jong,ㄱ
+qm26,x,cat,jong,ㅇ
+qm26,!,fin
+qm26,w,cat,jong,ㄴ
+qm26,z,cat,jong,ㅈ
+qm26,q,cat,jong,ㄷ
+##중성 ㅛ
+State transition function
+qm16,s,qm54
+qm16,a,qm47
+qm16,1,qm9
+qm16,x,qm10
+qm16,d,qm38
+qm16,!,qm13
+qm16,w,qm33
+qm16,z,qm35
+qm16,q,qm25
+Output function
+qm16,s,cat,jong,ㅂ
+qm16,a,cat,jong,ㅁ
+qm16,1,cat,jong,ㄱ
+qm16,x,cat,jong,ㅇ
+qm16,d,edit,jung,ㅗ
+qm16,!,fin
+qm16,w,cat,jong,ㄴ
+qm16,z,cat,jong,ㅈ
+qm16,q,cat,jong,ㄷ
+##종성ㅍ
+State transition function
+qm27,3,qm48
+qm27,s,qm23
+qm27,e,qm36
+qm27,a,qm6
+qm27,c,qm45
+qm27,1,qm37
+qm27,x,qm46
+qm27,d,qm38
+qm27,2,qm24
+qm27,!,qm13
+qm27,w,qm1
+qm27,z,qm39
+qm27,q,qm22
+Output function
+qm27,3,new with prev jong,ㅏ
+qm27,s,new,cho,ㄴ
+qm27,e,new with prev jong,ㅓ
+qm27,a,new,cho,ㅁ
+qm27,c,new with prev jong,ㅜ
+qm27,1,new,cho,ㄱ
+qm27,x,new,cho,ㅇ
+qm27,d,new with prev jong,ㅗ
+qm27,2,new with prev jong,ㅣ
+qm27,!,fin
+qm27,w,new,cho,ㄴ
+qm27,z,new,cho,ㅈ
+qm27,q,new,cho,ㄷ
+##겹자음을 위한 종성 다음 초성 ㅁ
+State transition function
+qm11,3,qm48
+qm11,e,qm36
+qm11,a,qm29
+qm11,c,qm45
+qm11,d,qm38
+qm11,2,qm24
+Output function
+qm11,3,cat,jung,ㅏ
+qm11,e,cat,jung,ㅓ
+qm11,a,delete cho and add to prev jung,ㅅ
+qm11,c,cat,jung,ㅜ
+qm11,d,cat,jung,ㅗ
+qm11,2,cat,jung,ㅣ
+##종성 ㅋ
+State transition function
+qm7,3,qm48
+qm7,s,qm41
+qm7,e,qm36
+qm7,a,qm6
+qm7,c,qm45
+qm7,1,qm5
+qm7,x,qm46
+qm7,d,qm38
+qm7,2,qm24
+qm7,!,qm13
+qm7,w,qm1
+qm7,z,qm39
+qm7,q,qm22
+Output function
+qm7,3,new with prev jong,ㅏ
+qm7,s,new,cho,ㅂ
+qm7,e,new with prev jong,ㅓ
+qm7,a,new,cho,ㅁ
+qm7,c,new with prev jong,ㅜ
+qm7,1,new,cho,ㄱ
+qm7,x,new,cho,ㅇ
+qm7,d,new with prev jong,ㅗ
+qm7,2,new with prev jong,ㅣ
+qm7,!,fin
+qm7,w,new,cho,ㄴ
+qm7,z,new,cho,ㅈ
+qm7,q,new,cho,ㄷ
+##겹자음을 위한 종성 다음 초성 ㅇ
+State transition function
+qm12,3,qm48
+qm12,e,qm36
+qm12,c,qm45
+qm12,x,qm28
+qm12,d,qm38
+qm12,2,qm24
+Output function
+qm12,3,new with prev jong,ㅏ
+qm12,e,new with prev jong,ㅓ
+qm12,c,new with prev jong,ㅜ
+qm12,x,delete cho and add to prev jong,ㅎ
+qm12,d,new with prev jong,ㅗ
+qm12,2,new with prev jong,ㅣ
+##종성 ㄹ
+State transition function
+qm4,3,qm48
+qm4,s,qm44
+qm4,e,qm36
+qm4,a,qm32
+qm4,c,qm45
+qm4,1,qm42
+qm4,x,qm12
+qm4,d,qm38
+qm4,2,qm24
+qm4,!,qm13
+qm4,w,qm33
+qm4,z,qm39
+qm4,q,qm30
+Output function
+qm4,3,new with prev jong,ㅏ
+qm4,s,edit,jong,ㄼ
+qm4,e,new with prev jong,ㅓ
+qm4,a,edit,jong,ㄻ
+qm4,c,new with prev jong,ㅜ
+qm4,1,edit,jong,ㄺ
+qm4,x,new,cho,ㅇ
+qm4,d,new with prev jong,ㅗ
+qm4,2,new with prev jong,ㅣ
+qm4,!,fin
+qm4,w,edit,jong,ㄴ
+qm4,z,new,cho,ㅈ
+qm4,q,new,cho,ㄷ
+##겹자음 종성 ㄵ
+State transition function
+qm8,3,qm48
+qm8,s,qm41
+qm8,e,qm36
+qm8,a,qm6
+qm8,c,qm45
+qm8,1,qm37
+qm8,x,qm46
+qm8,d,qm38
+qm8,2,qm24
+qm8,!,qm13
+qm8,w,qm1
+qm8,z,qm52
+qm8,q,qm22
+Output function
+qm8,3,new with prev split jong,ㅏ 
+qm8,s,new,cho,ㅂ
+qm8,e,new with prev split jong,ㅓ
+qm8,a,new,cho,ㅁ
+qm8,c,new with prev split jong,ㅜ
+qm8,1,new,cho,ㄱ
+qm8,x,new,cho,ㅇ
+qm8,d,new with prev split jong,ㅗ
+qm8,2,new with prev split jong,ㅣ
+qm8,!,fin
+qm8,w,new,cho,ㄴ
+qm8,z,reduce prev jong and new cho,ㅊ
+qm8,q,new,cho,ㅂ
+##종성 ㅊ
+State transition function
+qm31,3,qm48
+qm31,s,qm41
+qm31,e,qm36
+qm31,a,qm6
+qm31,c,qm45
+qm31,1,qm37
+qm31,x,qm46
+qm31,d,qm38
+qm31,2,qm24
+qm31,!,qm13
+qm31,w,qm1
+qm31,z,qm20
+qm31,q,qm22
+Output function
+qm31,3,new with prev jong,ㅏ
+qm31,s,new,cho,ㅂ
+qm31,e,new with prev jong,ㅓ
+qm31,a,new,cho,ㅁ
+qm31,c,new with prev jong,ㅜ
+qm31,1,new,cho,ㄱ
+qm31,x,new,cho,ㅇ
+qm31,d,new with prev jong,ㅗ
+qm31,2,new with prev jong,ㅣ
+qm31,!,fin
+qm31,w,new,cho,ㄴ
+qm31,z,delete prev jong and new cho,ㅉ
+qm31,q,new,cho,ㄷ
+##종성 ㅌ
+State transition function
+qm14,3,qm48
+qm14,s,qm41
+qm14,e,qm36
+qm14,a,qm6
+qm14,c,qm45
+qm14,1,qm37
+qm14,x,qm46
+qm14,d,qm38
+qm14,2,qm24
+qm14,!,qm13
+qm14,w,qm1
+qm14,z,qm39
+qm14,q,qm19
+Output function
+qm14,3,new with prev jong,ㅏ
+qm14,s,new,cho,ㅂ
+qm14,e,new with prev jong,ㅓ
+qm14,a,new,cho,ㅁ
+qm14,c,new with prev jong,ㅜ
+qm14,1,new,cho,ㄱ
+qm14,x,new,cho,ㅇ
+qm14,d,new with prev jong,ㅗ
+qm14,2,new with prev jong,ㅣ
+qm14,!,fin
+qm14,w,new,cho,ㄴ
+qm14,z,new,cho,ㅈ
+qm14,q,delete prev jong and new cho,ㄸ
+##이전 종성으로 돌아갈 수 있는 ㅃ
+State transition function
+qm23,3,qm48
+qm23,s,qm54
+qm23,e,qm36
+qm23,c,qm45
+qm23,d,qm38
+qm23,2,qm24
+Output function
+qm23,3,cat,jung,ㅏ
+qm23,s,delete cho and edit prev jong,ㅂ
+qm23,e,cat,jung,ㅓ
+qm23,c,cat,jung,ㅜ
+qm23,d,cat,jung,ㅗ
+qm23,2,cat,jung,ㅣ
+##겹자음 종성 ㅄ ㄽ
+State transition function
+qm29,3,qm48
+qm29,s,qm41
+qm29,e,qm36
+qm29,a,qm18
+qm29,c,qm45
+qm29,1,qm37
+qm29,x,qm46
+qm29,d,qm38
+qm29,2,qm24
+qm29,!,qm13
+qm29,w,qm1
+qm29,z,qm39
+qm29,q,qm22
+Output function
+qm29,3,new with prev split jong,ㅏ
+qm29,s,new,cho,ㅂ
+qm29,e,new with prev split jong,ㅓ
+qm29,a,reduce prev jong and new cho,ㅆ
+qm29,c,new with prev split jong,ㅜ
+qm29,1,new,cho,ㄱ
+qm29,x,new,cho,ㅇ
+qm29,d,new with prev split jong,ㅗ
+qm29,2,new with prev split jong,ㅣ
+qm29,!,fin
+qm29,w,new,cho,ㄴ
+qm29,z,new,cho,ㅈ
+qm29,q,new,cho,ㄷ
+##종성 ㄲ
+State transition function
+qm5,3,qm48
+qm5,s,qm41
+qm5,e,qm36
+qm5,a,qm6
+qm5,c,qm45
+qm5,1,qm9
+qm5,x,qm46
+qm5,d,qm38
+qm5,2,qm24
+qm5,!,qm13
+qm5,w,qm1
+qm5,z,qm39
+qm5,q,qm22
+Output function
+qm5,3,new with prev jong,ㅏ
+qm5,s,new,cho,ㅂ
+qm5,e,new with prev jong,ㅓ
+qm5,a,new,cho,ㅁ
+qm5,c,new with prev jong,ㅜ
+qm5,1,edit,jong,ㄱ
+qm5,x,new,cho,ㅇ
+qm5,d,new with prev jong,ㅗ
+qm5,2,new with prev jong,ㅣ
+qm5,!,fin
+qm5,w,new,cho,ㄴ
+qm5,z,new,cho,ㅈ
+qm5,q,new,cho,ㄷ
+##겹자음 종성 ㄶ, ㅀ
+State transition function
+qm28,3,qm48
+qm28,s,qm41
+qm28,e,qm36
+qm28,a,qm6
+qm28,c,qm45
+qm28,1,qm37
+qm28,x,qm12
+qm28,d,qm38
+qm28,2,qm24
+qm28,!,qm13
+qm28,w,qm1
+qm28,z,qm39
+qm28,q,qm22
+Output function
+qm28,3,new with prev split jong,ㅏ
+qm28,s,new,cho,ㅂ
+qm28,e,new with prev split jong,ㅓ
+qm28,a,new,cho,ㅁ
+qm28,c,new with prev split jong,ㅜ
+qm28,1,new,cho,ㄱ
+qm28,x,reduce prev jong and new cho,ㅇ
+qm28,d,new with prev split jong,ㅗ
+qm28,2,new with prev split jong,ㅣ
+qm28,!,fin
+qm28,w,new,cho,ㄴ
+qm28,z,new,cho,ㅈ
+qm28,q,new,cho,ㄷ
+##겸자음 ㄼ
+State transition function
+qm44,3,qm48
+qm44,s,qm15
+qm44,e,qm36
+qm44,a,qm6
+qm44,c,qm45
+qm44,1,qm37
+qm44,x,qm46
+qm44,d,qm38
+qm44,2,qm24
+qm44,!,qm13
+qm44,w,qm1
+qm44,z,qm39
+qm44,q,qm22
+Output function
+qm44,3,new with prev split jong,ㅏ
+qm44,s,edit,jong,ㄿ
+qm44,e,new with prev split jong,ㅓ
+qm44,a,new,cho,ㅁ
+qm44,c,new with prev split jong,ㅜ
+qm44,1,new,cho,ㄱ
+qm44,x,new,cho,ㅇ
+qm44,d,new with prev split jong,ㅗ
+qm44,2,new with prev split jong,ㅣ
+qm44,!,fin
+qm44,w,new,cho,ㄴ
+qm44,z,new,cho,ㅈ
+qm44,q,new,cho,ㄷ
+##겹자음 ㄻ
+State transition function
+qm32,3,qm48
+qm32,s,qm41
+qm32,e,qm36
+qm32,a,qm21
+qm32,c,qm45
+qm32,1,qm37
+qm32,x,qm46
+qm32,d,qm38
+qm32,2,qm24
+qm32,!,qm13
+qm32,w,qm1
+qm32,z,qm39
+qm32,q,qm22
+Output function
+qm32,3,new with prev split jong,ㅏ
+qm32,s,new,cho,
+qm32,e,new with prev split jong,ㅓ
+qm32,a,edit,jong,ㄽ
+qm32,c,new with prev split jong,ㅜ
+qm32,1,new,cho,ㄱ
+qm32,x,new,cho,ㅇ
+qm32,d,new with prev split jong,ㅗ
+qm32,2,new with prev split jong,ㅣ
+qm32,!,fin
+qm32,w,new,cho,ㄴ
+qm32,z,new,cho,ㅈ
+qm32,q,new,cho,ㄷ
+##qm42
+State transition function
+qm42,3,qm48
+qm42,s,qm41
+qm42,e,qm36
+qm42,a,qm6
+qm42,c,qm45
+qm42,1,qm43
+qm42,x,qm46
+qm42,d,qm38
+qm42,2,qm24
+qm42,!,qm13
+qm42,w,qm1
+qm42,z,qm39
+qm42,q,qm22
+Output function
+qm42,3,
+qm42,s,
+qm42,e,
+qm42,a,
+qm42,c,
+qm42,1,
+qm42,x,
+qm42,d,
+qm42,2,
+qm42,!,
+qm42,w,
+qm42,z,
+qm42,q,
+##qm30
+State transition function
+qm30,3,qm48
+qm30,e,qm36
+qm30,c,qm45
+qm30,d,qm38
+qm30,2,qm24
+qm30,q,qm40
+Output function
+qm30,3,
+qm30,e,
+qm30,c,
+qm30,d,
+qm30,2,
+qm30,q,
+##qm52
+State transition function
+qm52,3,qm48
+qm52,e,qm36
+qm52,c,qm45
+qm52,d,qm38
+qm52,2,qm24
+qm52,z,qm50
+Output function
+qm52,3,
+qm52,e,
+qm52,c,
+qm52,d,
+qm52,2,
+qm52,z,
+##qm20
+State transition function
+qm20,3,qm48
+qm20,e,qm36
+qm20,c,qm45
+qm20,d,qm38
+qm20,2,qm24
+qm20,z,qm35
+Output function
+qm20,3,
+qm20,e,
+qm20,c,
+qm20,d,
+qm20,2,
+qm20,z,
+##qm19
+State transition function
+qm19,3,qm48
+qm19,e,qm36
+qm19,c,qm45
+qm19,d,qm38
+qm19,2,qm24
+qm19,q,qm25
+Output function
+qm19,3,
+qm19,e,
+qm19,c,
+qm19,d,
+qm19,2,
+qm19,q,
+##qm18
+State transition function
+qm18,3,qm48
+qm18,e,qm36
+qm18,a,qm11
+qm18,c,qm45
+qm18,d,qm38
+qm18,2,qm24
+Output function
+qm18,3,
+qm18,e,
+qm18,a,
+qm18,c,
+qm18,d,
+qm18,2,
+##qm15
+State transition function
+qm15,3,qm48
+qm15,s,qm51
+qm15,e,qm36
+qm15,a,qm6
+qm15,c,qm45
+qm15,1,qm37
+qm15,x,qm46
+qm15,d,qm38
+qm15,2,qm24
+qm15,!,qm13
+qm15,w,qm1
+qm15,z,qm39
+qm15,q,qm22
+Output function
+qm15,3,
+qm15,s,
+qm15,e,
+qm15,a,
+qm15,c,
+qm15,1,
+qm15,x,
+qm15,d,
+qm15,2,
+qm15,!,
+qm15,w,
+qm15,z,
+qm15,q,
+##qm21
+State transition function
+qm21,3,qm48
+qm21,s,qm41
+qm21,e,qm36
+qm21,a,qm34
+qm21,c,qm45
+qm21,1,qm37
+qm21,x,qm46
+qm21,d,qm38
+qm21,2,qm24
+qm21,!,qm13
+qm21,w,qm1
+qm21,z,qm39
+qm21,q,qm22
+Output function
+qm21,3,
+qm21,s,
+qm21,e,
+qm21,a,
+qm21,c,
+qm21,1,
+qm21,x,
+qm21,d,
+qm21,2,
+qm21,!,
+qm21,w,
+qm21,z,
+qm21,q,
+##qm43
+State transition function
+qm43,3,qm48
+qm43,e,qm36
+qm43,c,qm45
+qm43,1,qm2
+qm43,d,qm38
+qm43,2,qm24
+Output function
+qm43,3,
+qm43,e,
+qm43,c,
+qm43,1,
+qm43,d,
+qm43,2,
+##qm40
+State transition function
+qm40,3,qm48
+qm40,s,qm41
+qm40,e,qm36
+qm40,a,qm6
+qm40,c,qm45
+qm40,1,qm37
+qm40,x,qm46
+qm40,d,qm38
+qm40,2,qm24
+qm40,!,qm13
+qm40,w,qm1
+qm40,z,qm39
+qm40,q,qm0
+Output function
+qm40,3,
+qm40,s,
+qm40,e,
+qm40,a,
+qm40,c,
+qm40,1,
+qm40,x,
+qm40,d,
+qm40,2,
+qm40,!,
+qm40,w,
+qm40,z,
+qm40,q,
+##qm50
+State transition function
+qm50,3,qm48
+qm50,e,qm36
+qm50,c,qm45
+qm50,d,qm38
+qm50,2,qm24
+qm50,z,qm8
+Output function
+qm50,3,
+qm50,e,
+qm50,c,
+qm50,d,
+qm50,2,
+qm50,z,
+##qm51
+State transition function
+qm51,3,qm48
+qm51,s,qm44
+qm51,e,qm36
+qm51,c,qm45
+qm51,d,qm38
+qm51,2,qm24
+Output function
+qm51,3,
+qm51,s,
+qm51,e,
+qm51,c,
+qm51,d,
+qm51,2,
+##qm34
+State transition function
+qm34,3,qm48
+qm34,e,qm36
+qm34,a,qm32
+qm34,c,qm45
+qm34,d,qm38
+qm34,2,qm24
+Output function
+qm34,3,
+qm34,e,
+qm34,a,
+qm34,c,
+qm34,d,
+qm34,2,
+##qm2
+State transition function
+qm2,3,qm48
+qm2,e,qm36
+qm2,c,qm45
+qm2,1,qm42
+qm2,d,qm38
+qm2,2,qm24
+Output function
+qm2,3,
+qm2,e,
+qm2,c,
+qm2,1,
+qm2,d,
+qm2,2,
+##qm0
+State transition function
+qm0,3,qm48
+qm0,e,qm36
+qm0,c,qm45
+qm0,d,qm38
+qm0,2,qm24
+qm0,q,qm30
+Output function
+qm0,3,
+qm0,e,
+qm0,c,
+qm0,d,
+qm0,2,
+qm0,q,
+Initial state
+qm17
+Final state
+qm9,qm4,qm28,qm36,qm29,qm40,qm21,qm38,qm16,qm10,qm42,qm25,qm32,qm24,qm15,qm27,qm53,qm35,qm3,qm8,qm14,qm17,qm48,qm45,qm7,qm5,qm26,qm31,qm47,qm33,qm54,qm44,qm13

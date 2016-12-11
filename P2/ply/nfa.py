@@ -3,6 +3,8 @@ __name__="nfa"
 import __main__
 DEBUG=__main__.DEBUG #debug flag is migrated
 
+FORMEALY=False
+
 DEAD_STATE = 'dead_state'
 DEAD_STATE_SET = frozenset([DEAD_STATE])
 
@@ -36,8 +38,32 @@ def toString() :
   outputs.append(','.join(symbols))
 
   outputs.append('State transition function')
-  for d in delta :
-    outputs.append( ','.join([d[0],d[1],delta[d]]) )
+  tempStatesQueue=[initState]
+  i=0
+  while i<len(states) :
+    tempState = tempStatesQueue[i]
+    if FORMEALY :
+      outputs.append("##"+tempState)
+      outputs.append("State transition function")
+    for c in symbols :
+      if(tempState,c) in delta :
+        outputs.append(','.join([tempState,c,delta[(tempState,c)]]))
+        if not(delta[(tempState,c)] in tempStatesQueue) :
+          tempStatesQueue.append(delta[(tempState,c)])
+    if FORMEALY :
+      outputs.append("Output function")
+      for c in symbols :
+        if(tempState,c) in delta :
+          outputs.append(tempState+","+c+",")
+    i+=1
+
+  # for q in states :
+  #   for c in symbols :
+  #     if (q,c) in delta :
+  #       outputs.append(','.join([q,c,delta[(q,c)]]))
+
+  # for d in delta :
+  #   outputs.append( ','.join([d[0],d[1],delta[d]]) )
 
   outputs.append('Initial state')
   outputs.append(initState)

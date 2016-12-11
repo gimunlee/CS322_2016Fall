@@ -246,6 +246,10 @@ def generateENFAString() :
     outputStr= outputStr[:-1] + '\n'
 
     outputStr+= 'State transition function\n'
+    # for i in range(len(statesTuple)) :
+    #     for j in range(len(symbolsTuple)) :
+    #         if (statesTuple[i], symbolsTuple[j]) in nfaDelta :
+    #             outputStr+="%s,%s,%s\n"%(statesTuple[i],symbolsTuple[j],nfaDelta[ (statesTuple[i], symbolsTuple[j]) ])
     for key in nfaDelta.keys() :
         for q2 in nfaDelta[key] :
             outputStr+='%s,%s,%s\n'%(key[0],key[1],q2)
