@@ -5,15 +5,38 @@ new with prev jong
 
 next는 루프돌 때 쓰기로.
 
-next,cho,ㄱ
 new,cho,ㄱ
-edit,cho,ㄹ
-cat,jung,ㅏ
 new with prev jong,ㅏ
 new with prev split jong,ㅏ
+next,cho,ㄱ
+edit,cho,ㄹ
+cat,jung,ㅏ
+delete prev jong and new cho,ㅉ
+
 delete cho and add to prev jong,ㅅ
 delete cho and edit prev jong,ㅂ
 reduce prev jong and new cho,ㅆ
-delete prev jong and new cho,ㅉ
 insert,ㅣ
 fin
+
+ㅇㅏㄴㅈㅇㅡㄴㅂㅐㅇㅇㅣ
+ㅇㅏㄴㄴㅕㅇ
+안녕
+ㅇㅏㄴㅈㅏ
+
+# cho= 6
+# jung= 13
+# jong= 4
+# # for cho in range(10) :
+# print(chr(0xac00 + (cho*21 + jung) * 28 + jong))
+def hangulCodepoints(t) :
+    #triple of cho, jung, jong
+    # print(type(t))
+    # if type(t) is int :
+    #     return t
+    if (type(t) is list) or (type(t) is tuple):
+        return {'mo':lambda:t[1],
+        'cho':lambda:ord(codeToJamo['cho'][t[1][0]]),
+        'jung':lambda:0xac00+t[1][0]*21*28+t[1][1]*28,
+        'jong':lambda:0xac00+t[1][0]*21*28+t[1][1]*28+t[1][2]
+        }[t[0]]()

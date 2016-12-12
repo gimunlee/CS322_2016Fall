@@ -258,7 +258,7 @@ qm54,z,qm39
 qm54,q,qm22
 Output function
 qm54,3,new with prev jong,ㅏ
-qm54,s,new,cho,ㅍ
+qm54,s,edit,jong,ㅍ
 qm54,e,new with prev jong,ㅓ
 qm54,a,new,cho,ㅁ
 qm54,c,new with prev jong,ㅜ
@@ -562,7 +562,7 @@ qm27,z,qm39
 qm27,q,qm22
 Output function
 qm27,3,new with prev jong,ㅏ
-qm27,s,new,cho,ㄴ
+qm27,s,delete jong and new cho,ㅃ
 qm27,e,new with prev jong,ㅓ
 qm27,a,new,cho,ㅁ
 qm27,c,new with prev jong,ㅜ
@@ -585,7 +585,7 @@ qm11,2,qm24
 Output function
 qm11,3,cat,jung,ㅏ
 qm11,e,cat,jung,ㅓ
-qm11,a,delete cho and add to prev jung,ㅅ
+qm11,a,delete cho and add to prev jong,ㅅ
 qm11,c,cat,jung,ㅜ
 qm11,d,cat,jung,ㅗ
 qm11,2,cat,jung,ㅣ
@@ -610,7 +610,7 @@ qm7,s,new,cho,ㅂ
 qm7,e,new with prev jong,ㅓ
 qm7,a,new,cho,ㅁ
 qm7,c,new with prev jong,ㅜ
-qm7,1,new,cho,ㄱ
+qm7,1,next,jong,ㄲ
 qm7,x,new,cho,ㅇ
 qm7,d,new with prev jong,ㅗ
 qm7,2,new with prev jong,ㅣ
@@ -627,12 +627,12 @@ qm12,x,qm28
 qm12,d,qm38
 qm12,2,qm24
 Output function
-qm12,3,new with prev jong,ㅏ
-qm12,e,new with prev jong,ㅓ
-qm12,c,new with prev jong,ㅜ
+qm12,3,cat,jung,ㅏ
+qm12,e,cat,jung,ㅓ
+qm12,c,cat,jung,ㅜ
 qm12,x,delete cho and add to prev jong,ㅎ
-qm12,d,new with prev jong,ㅗ
-qm12,2,new with prev jong,ㅣ
+qm12,d,cat,jung,ㅗ
+qm12,2,cat,jung,ㅣ
 ##종성 ㄹ
 State transition function
 qm4,3,qm48
@@ -897,7 +897,7 @@ qm32,z,qm39
 qm32,q,qm22
 Output function
 qm32,3,new with prev split jong,ㅏ
-qm32,s,new,cho,
+qm32,s,new,cho,ㅂ
 qm32,e,new with prev split jong,ㅓ
 qm32,a,edit,jong,ㄽ
 qm32,c,new with prev split jong,ㅜ

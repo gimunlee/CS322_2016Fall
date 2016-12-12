@@ -45,6 +45,27 @@
             ]
         },
         {
+            "name": "PythonP3",
+            "type": "python",
+            "request": "launch",
+            "stopOnEntry": false,
+            "pythonPath": "${config.python.pythonPath}",
+            "program": "${workspaceRoot}/P3/P3.py",
+            "args": [
+                "--hangulMealy",
+                "./mdfaVegare_3.txt",
+                "--input",
+                "./dfainput.txt",
+                "--debug",
+                "1"
+            ],
+            "debugOptions": [
+                "WaitOnAbnormalExit",
+                "WaitOnNormalExit",
+                "RedirectOutput"
+            ]
+        },
+        {
             "name": "PythonP2TestDfa",
             "type": "python",
             "request": "launch",
