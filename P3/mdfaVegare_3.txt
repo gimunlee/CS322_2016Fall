@@ -574,7 +574,7 @@ qm27,!,fin
 qm27,w,new,cho,ㄴ
 qm27,z,new,cho,ㅈ
 qm27,q,new,cho,ㄷ
-##겹자음을 위한 종성 다음 초성 ㅁ
+##겹자음ㄳㅄ을 위한 종성 다음 초성 ㅁ
 State transition function
 qm11,3,qm48
 qm11,e,qm36
@@ -764,7 +764,7 @@ qm23,e,cat,jung,ㅓ
 qm23,c,cat,jung,ㅜ
 qm23,d,cat,jung,ㅗ
 qm23,2,cat,jung,ㅣ
-##겹자음 종성 ㅄ ㄽ
+##겹자음 종성 ㅄㄳ
 State transition function
 qm29,3,qm48
 qm29,s,qm41
@@ -909,7 +909,7 @@ qm32,!,fin
 qm32,w,new,cho,ㄴ
 qm32,z,new,cho,ㅈ
 qm32,q,new,cho,ㄷ
-##qm42
+##겹자음 ㄺ
 State transition function
 qm42,3,qm48
 qm42,s,qm41
@@ -925,20 +925,20 @@ qm42,w,qm1
 qm42,z,qm39
 qm42,q,qm22
 Output function
-qm42,3,
-qm42,s,
-qm42,e,
-qm42,a,
-qm42,c,
-qm42,1,
-qm42,x,
-qm42,d,
-qm42,2,
-qm42,!,
-qm42,w,
-qm42,z,
-qm42,q,
-##qm30
+qm42,3,new with prev split jong,ㅏ
+qm42,s,new,cho,ㅂ
+qm42,e,new with prev split jong,ㅓ
+qm42,a,new,cho,ㅁ
+qm42,c,new with prev split jong,ㅜ
+qm42,1,reduce prev jong and new cho,ㅋ
+qm42,x,new,cho,ㅇ
+qm42,d,new with prev split jong,ㅗ
+qm42,2,new with prev split jong,ㅣ
+qm42,!,fin
+qm42,w,new,cho,ㄴ
+qm42,z,new,cho,ㅈ
+qm42,q,new,cho,ㄷ
+##겹자음ㄾ을 위한 종성 다음 초성 ㄷ
 State transition function
 qm30,3,qm48
 qm30,e,qm36
@@ -947,13 +947,13 @@ qm30,d,qm38
 qm30,2,qm24
 qm30,q,qm40
 Output function
-qm30,3,
-qm30,e,
-qm30,c,
-qm30,d,
-qm30,2,
-qm30,q,
-##qm52
+qm30,3,cat,jung,ㅏ
+qm30,e,cat,jung,ㅓ
+qm30,c,cat,jung,ㅜ
+qm30,d,cat,jung,ㅗ
+qm30,2,cat,jung,ㅣ
+qm30,q,delete cho and edit prev jong,ㄾ
+##겹자음ㄵ에서 파생된 종성 다음 초성 ㅊ
 State transition function
 qm52,3,qm48
 qm52,e,qm36
@@ -962,13 +962,13 @@ qm52,d,qm38
 qm52,2,qm24
 qm52,z,qm50
 Output function
-qm52,3,
-qm52,e,
-qm52,c,
-qm52,d,
-qm52,2,
-qm52,z,
-##qm20
+qm52,3,cat,jung,ㅏ
+qm52,e,cat,jung,ㅓ
+qm52,c,cat,jung,ㅜ
+qm52,d,cat,jung,ㅗ
+qm52,2,cat,jung,ㅣ
+qm52,z,edit,cho,ㅉ
+##종성다음 초성 ㅉ
 State transition function
 qm20,3,qm48
 qm20,e,qm36
@@ -977,13 +977,13 @@ qm20,d,qm38
 qm20,2,qm24
 qm20,z,qm35
 Output function
-qm20,3,
-qm20,e,
-qm20,c,
-qm20,d,
-qm20,2,
-qm20,z,
-##qm19
+qm20,3,cat,jung,ㅏ
+qm20,e,cat,jung,ㅓ
+qm20,c,cat,jung,ㅜ
+qm20,d,cat,jung,ㅗ
+qm20,2,cat,jung,ㅣ
+qm20,z,delete cho and edit prev jong,ㅈ
+##종성다음 초성 ㄸ
 State transition function
 qm19,3,qm48
 qm19,e,qm36
@@ -992,13 +992,13 @@ qm19,d,qm38
 qm19,2,qm24
 qm19,q,qm25
 Output function
-qm19,3,
-qm19,e,
-qm19,c,
-qm19,d,
-qm19,2,
-qm19,q,
-##qm18
+qm19,3,cat,jung,ㅏ
+qm19,e,cat,jung,ㅓ
+qm19,c,cat,jung,ㅜ
+qm19,d,cat,jung,ㅗ
+qm19,2,cat,jung,ㅣ
+qm19,q,delete cho and edit prev jong,ㄷ
+##겹자음ㅄㄳ에서 나온 초성 ㅆ
 State transition function
 qm18,3,qm48
 qm18,e,qm36
@@ -1007,13 +1007,13 @@ qm18,c,qm45
 qm18,d,qm38
 qm18,2,qm24
 Output function
-qm18,3,
-qm18,e,
-qm18,a,
-qm18,c,
-qm18,d,
-qm18,2,
-##qm15
+qm18,3,cat,jung,ㅏ
+qm18,e,cat,jung,ㅓ
+qm18,a,edit,cho,ㅁ
+qm18,c,cat,jung,ㅜ
+qm18,d,cat,jung,ㅗ
+qm18,2,cat,jung,ㅣ
+##겹자음ㄿ
 State transition function
 qm15,3,qm48
 qm15,s,qm51
@@ -1029,20 +1029,20 @@ qm15,w,qm1
 qm15,z,qm39
 qm15,q,qm22
 Output function
-qm15,3,
-qm15,s,
-qm15,e,
-qm15,a,
-qm15,c,
-qm15,1,
-qm15,x,
-qm15,d,
-qm15,2,
-qm15,!,
-qm15,w,
-qm15,z,
-qm15,q,
-##qm21
+qm15,3,new with prev split jong,ㅏ
+qm15,s,reduce prev jong and new cho,ㅃ
+qm15,e,new with prev split jong,ㅓ
+qm15,a,new,cho,ㅁ
+qm15,c,new with prev split jong,ㅜ
+qm15,1,new,cho,ㄱ
+qm15,x,new,cho,ㅇ
+qm15,d,new with prev split jong,ㅗ
+qm15,2,new with prev split jong,ㅣ
+qm15,!,fin
+qm15,w,new,cho,ㄴ
+qm15,z,new,cho,ㅈ
+qm15,q,new,cho,ㄷ
+##종성 ㄽ
 State transition function
 qm21,3,qm48
 qm21,s,qm41
@@ -1058,20 +1058,20 @@ qm21,w,qm1
 qm21,z,qm39
 qm21,q,qm22
 Output function
-qm21,3,
-qm21,s,
-qm21,e,
-qm21,a,
-qm21,c,
-qm21,1,
-qm21,x,
-qm21,d,
-qm21,2,
-qm21,!,
-qm21,w,
-qm21,z,
-qm21,q,
-##qm43
+qm21,3,new with prev split jong,ㅏ
+qm21,s,new,cho,ㅂ
+qm21,e,new with prev split jong,ㅓ
+qm21,a,reduce prev jong and new cho,ㅆ
+qm21,c,new with prev split jong,ㅜ
+qm21,1,new,cho,ㄱ
+qm21,x,new,cho,ㅇ
+qm21,d,new with prev split jong,ㅗ
+qm21,2,new with prev split jong,ㅣ
+qm21,!,fin
+qm21,w,new,cho,ㄴ
+qm21,z,new,cho,ㅈ
+qm21,q,new,cho,ㄷ
+##겹자음ㄺ다음 초성 ㅋ
 State transition function
 qm43,3,qm48
 qm43,e,qm36
@@ -1080,13 +1080,13 @@ qm43,1,qm2
 qm43,d,qm38
 qm43,2,qm24
 Output function
-qm43,3,
-qm43,e,
-qm43,c,
-qm43,1,
-qm43,d,
-qm43,2,
-##qm40
+qm43,3,cat,jung,ㅏ
+qm43,e,cat,jung,ㅓ
+qm43,c,cat,jung,ㅜ
+qm43,1,edit,cho,ㄲ
+qm43,d,cat,jung,ㅗ
+qm43,2,cat,jung,ㅣ
+##겹자음 ㄾ
 State transition function
 qm40,3,qm48
 qm40,s,qm41
@@ -1102,20 +1102,20 @@ qm40,w,qm1
 qm40,z,qm39
 qm40,q,qm0
 Output function
-qm40,3,
-qm40,s,
-qm40,e,
-qm40,a,
-qm40,c,
-qm40,1,
-qm40,x,
-qm40,d,
-qm40,2,
-qm40,!,
-qm40,w,
-qm40,z,
-qm40,q,
-##qm50
+qm40,3,new with prev split jong,ㅏ
+qm40,s,new,cho,ㅂ
+qm40,e,new with prev split jong,ㅓ
+qm40,a,new,cho,ㅁ
+qm40,c,new with prev split jong,ㅜ
+qm40,1,new,cho,ㄱ
+qm40,x,new,cho,ㅇ
+qm40,d,new with prev split jong,ㅗ
+qm40,2,new with prev split jong,ㅣ
+qm40,!,fin
+qm40,w,new,cho,ㄴ
+qm40,z,new,cho,ㅈ
+qm40,q,reduce prev jong and new cho,ㄸ
+##겹자음ㄵ다음 초성 ㅉ
 State transition function
 qm50,3,qm48
 qm50,e,qm36
@@ -1124,13 +1124,13 @@ qm50,d,qm38
 qm50,2,qm24
 qm50,z,qm8
 Output function
-qm50,3,
-qm50,e,
-qm50,c,
-qm50,d,
-qm50,2,
-qm50,z,
-##qm51
+qm50,3,cat,jung,ㅏ
+qm50,e,cat,jung,ㅓ
+qm50,c,cat,jung,ㅜ
+qm50,d,cat,jung,ㅗ
+qm50,2,cat,jung,ㅣ
+qm50,z,delete cho and edit prev jong,ㄵ
+##겹자음ㄿ다음 초성 ㅃ
 State transition function
 qm51,3,qm48
 qm51,s,qm44
@@ -1139,13 +1139,13 @@ qm51,c,qm45
 qm51,d,qm38
 qm51,2,qm24
 Output function
-qm51,3,
-qm51,s,
-qm51,e,
-qm51,c,
-qm51,d,
-qm51,2,
-##qm34
+qm51,3,cat,jung,ㅏ
+qm51,s,delete cho and edit prev jong,ㄼ
+qm51,e,cat,jung,ㅓ
+qm51,c,cat,jung,ㅜ
+qm51,d,cat,jung,ㅗ
+qm51,2,cat,jung,ㅣ
+##겹자음ㄽ다음 초성 ㅆ
 State transition function
 qm34,3,qm48
 qm34,e,qm36
@@ -1154,13 +1154,13 @@ qm34,c,qm45
 qm34,d,qm38
 qm34,2,qm24
 Output function
-qm34,3,
-qm34,e,
-qm34,a,
-qm34,c,
-qm34,d,
-qm34,2,
-##qm2
+qm34,3,cat,jung,ㅏ
+qm34,e,cat,jung,ㅓ
+qm34,a,delete cho and edit prev jong,ㄻ
+qm34,c,cat,jung,ㅜ
+qm34,d,cat,jung,ㅗ
+qm34,2,cat,jung,ㅣ
+##겹자음ㄺ다음 초성 ㄲ
 State transition function
 qm2,3,qm48
 qm2,e,qm36
@@ -1169,13 +1169,13 @@ qm2,1,qm42
 qm2,d,qm38
 qm2,2,qm24
 Output function
-qm2,3,
-qm2,e,
-qm2,c,
-qm2,1,
-qm2,d,
-qm2,2,
-##qm0
+qm2,3,cat,jung,ㅏ
+qm2,e,cat,jung,ㅓ
+qm2,c,cat,jung,ㅜ
+qm2,1,delete cho and edit prev jong,ㄺ
+qm2,d,cat,jung,ㅗ
+qm2,2,cat,jung,ㅣ
+##겹자음ㄾ 다음 초성 ㄸ
 State transition function
 qm0,3,qm48
 qm0,e,qm36
@@ -1184,12 +1184,12 @@ qm0,d,qm38
 qm0,2,qm24
 qm0,q,qm30
 Output function
-qm0,3,
-qm0,e,
-qm0,c,
-qm0,d,
-qm0,2,
-qm0,q,
+qm0,3,cat,jung,ㅏ
+qm0,e,cat,jung,ㅓ
+qm0,c,cat,jung,ㅜ
+qm0,d,cat,jung,ㅗ
+qm0,2,cat,jung,ㅣ
+qm0,q,edit,cho,ㄷ
 Initial state
 qm17
 Final state
