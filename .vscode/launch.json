@@ -57,7 +57,7 @@
                 "--input",
                 "./dfainput.txt",
                 "--debug",
-                "1"
+                "0"
             ],
             "debugOptions": [
                 "WaitOnAbnormalExit",

@@ -34,6 +34,8 @@ delCases={
 }
 # Build a hangul unicode string, with combination method.
 def buildCombHangul(t) :
+  # if DEBUG: print("build : " + t[0] + t[1] + t[2])
+  # print(t)
   if len(t)==2 :
     t=(t[0],t[1],'')
   assert(len(t)==3)
@@ -52,11 +54,17 @@ def hangul(pulleossugi) :
     if len(stack) == 2 :
       stack.append(('jong',''))
     if len(stack) == 3 :
+      # print(stack)
       char = (stack[0][1],stack[1][1],stack[2][1])
       output.append(buildCombHangul(char))
   output = []
   stack = []
   for c in pulleossugi :
+    if c[0]=='space' :
+      pushHangul(stack)
+      output.append(' ')
+      stack.clear()
+      continue
     if c[0]=='cho' :
       pushHangul(stack)
       stack.clear()
@@ -108,6 +116,9 @@ for line in inputFile.readlines() :
         if char == '<' :
             #####################################
             continue
+        if char == ' ' :
+            pulleossugi.append(('space',))
+            continue
         if (currentState, char) in hangulMealy.delta :
             #transition exists
             def newHandler(result,lamb) : result.append((lamb[1],lamb[2]))
@@ -116,7 +127,7 @@ for line in inputFile.readlines() :
               result[-1]=('cho',result[-1][1])
               result.append(('jung',lamb[1]))
             def newWithPrevSplitJong(result,lamb) :
-              print(result)
+              # print(result)
               assert(result[-1][0]=='jong')
               assert(result[-1][1] in doubleJaums.keys())
               temp = doubleJaums[result[-1][1]][1]

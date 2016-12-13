@@ -678,7 +678,7 @@ qm8,w,qm1
 qm8,z,qm52
 qm8,q,qm22
 Output function
-qm8,3,new with prev split jong,ㅏ 
+qm8,3,new with prev split jong,ㅏ
 qm8,s,new,cho,ㅂ
 qm8,e,new with prev split jong,ㅓ
 qm8,a,new,cho,ㅁ

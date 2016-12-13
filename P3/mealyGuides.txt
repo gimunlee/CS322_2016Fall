@@ -19,24 +19,7 @@ reduce prev jong and new cho,ㅆ
 insert,ㅣ
 fin
 
-ㅇㅏㄴㅈㅇㅡㄴㅂㅐㅇㅇㅣ
-ㅇㅏㄴㄴㅕㅇ
-안녕
-ㅇㅏㄴㅈㅏ
-
-# cho= 6
-# jung= 13
-# jong= 4
-# # for cho in range(10) :
-# print(chr(0xac00 + (cho*21 + jung) * 28 + jong))
-def hangulCodepoints(t) :
-    #triple of cho, jung, jong
-    # print(type(t))
-    # if type(t) is int :
-    #     return t
-    if (type(t) is list) or (type(t) is tuple):
-        return {'mo':lambda:t[1],
-        'cho':lambda:ord(codeToJamo['cho'][t[1][0]]),
-        'jung':lambda:0xac00+t[1][0]*21*28+t[1][1]*28,
-        'jong':lambda:0xac00+t[1][0]*21*28+t[1][1]*28+t[1][2]
-        }[t[0]]()
+중성이 기본모음 (ㅏㅑㅓㅕㅗㅛㅜㅠㅡㅣ) 몇 개로 구성되었나 보시면 됩니다
+단모음은 단 하나의 기본모음으로, 이중모음은 두개 이상의 기본모음으로 구성된
+모음이라고 보시면 됩니다
+아래의 경우 가장 최근의 초성, 중성, 종성에서 지워져야 한다고 이해하시면 되겠습니다
