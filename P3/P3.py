@@ -87,8 +87,11 @@ else : print("The path of the hangulMealy machine description file not found"); 
 # flags for paths of input and output files
 if '--input' in sys.argv : inputFilePath=sys.argv[sys.argv.index('--input')+1]
 else : print("The path of input file not found"); quit(-1)
-#if '--output' in sys.argv : outputFilePath=sys.argv[sys.argv.index('--output')+1]
-#else : print("The path of output file not found"); quit(-1)
+isOutputFile = False
+if '--output' in sys.argv : outputFilePath=sys.argv[sys.argv.index('--output')+1]; isOutputFile=True
+else :
+  isOutputFile = False
+  # print("The path of output file not found"); quit(-1)
 
 # flag for debug printing option. 0 for off, 1 for on
 if '--debug' in sys.argv :
@@ -103,6 +106,8 @@ hangulMealy.read(mealyFilePath)
 ########################################
 
 outputLine=[]
+if isOutputFile :
+  outputFile = open(outputFilePath,'w',-1,'utf-8')
 
 inputFile=open(inputFilePath,'r',-1,'utf-8')
 for line in inputFile.readlines() :
@@ -113,7 +118,7 @@ for line in inputFile.readlines() :
     stack=[]
     pulleossugi=[]
     for char in line :
-        if DEBUG : print("STACK" + str(stack))
+        # if DEBUG : print("STACK" + str(stack))
         if char == '\n' :
             break
         if char == '<' :
@@ -201,6 +206,28 @@ for line in inputFile.readlines() :
                 result.append(pushStack(stack,nextState,('cho',lamb[1]),False))
             def finHandler(result, lamb) :
                 stack[-1]=(stack[-1][0],stack[-1][1],nextState)
+            def moveChoToJongNewChoHandler(result, lamb) :
+                # print('RESULT' + str(result))
+                # assert(result[-2][0]=='jung')
+                if result[-1][0]=='cho' :
+                  result[-1]=('jong',result[-1][1])
+                result.append(pushStack(stack,nextState,('cho',lamb[1]),True))
+            def moveChoToJongNewChoNotFinHandler(result, lamb) :
+                # assert(result[-2][0]=='jung')
+                if result[-1][0]=='cho' :
+                  result[-1]=('jong',result[-1][1])
+                result.append(pushStack(stack,nextState,('cho',lamb[1]),False))
+            def addChoToJongNewChoHandler(result, lamb) :
+                assert(result[-1][0]=='cho')
+                assert(result[-2][0]=='jong')
+                tempJong = result[-1]
+                newPair = (result[-2][1],tempJong[1])
+                assert(newPair in doubleJaums.values())
+                for dj in doubleJaums :
+                  if doubleJaums[dj]==newPair :
+                    result[-2]=pushStack(stack,nextState,('jong',dj),False)
+                result[-1]=pushStack(stack,nextState,('cho',lamb[1]),False)
+
 
             currentLamb = hangulMealy.lamb[currentState,char]
             if DEBUG : print(currentLamb,end=' ')
@@ -215,6 +242,9 @@ for line in inputFile.readlines() :
               'delete cho and add to prev jong':deleteChoAddToJongHander,
               'delete cho and edit prev jong':deleteChoEditJongHandler,
               'reduce prev jong and new cho':reduceJongNewChoHandler,
+              'move cho to jong and new cho':moveChoToJongNewChoHandler,
+              'move cho to jong and new cho but not fin':moveChoToJongNewChoNotFinHandler,
+              'add cho to jong and new cho':addChoToJongNewChoHandler,
               'fin':finHandler
             }
             if currentLamb[0] in handler.keys() :
@@ -230,10 +260,22 @@ for line in inputFile.readlines() :
             break
     if DEBUG : print(outputLine)
     if DEBUG : print(pulleossugi)
-    if DEBUG : print("STACK : " + str(stack))
-    print("(입력) $ ",end='')
-    print(line[:-1], end="")
-    if not line[-1] is '\n' : print(line[-1],end='')
-    print('',end='\n(출력) $ ')
-    print(''.join(hangul(pulleossugi)))
+    # if DEBUG : print("STACK : " + str(stack))
+
+    if DEBUG or not isOutputFile :
+      print("(입력) $ ",end='')
+      print(line[:-1], end="")
+      if not line[-1] is '\n' : print(line[-1],end='')
+      print('',end='\n(출력) $ ')
+      print(''.join(hangul(pulleossugi)))
+
+    if isOutputFile :
+      outputFile.write("(입력) $ ")
+      outputFile.write(line[:-1])
+      if not line[-1] is '\n' : outputFile.write(line[-1])
+      outputFile.write("\n(출력) $ ")
+      outputFile.write(''.join(hangul(pulleossugi)))
+      outputFile.write('\n')
 inputFile.close()
+if isOutputFile :
+  outputFile.close()

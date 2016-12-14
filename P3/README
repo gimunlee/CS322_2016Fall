@@ -7,6 +7,9 @@ cmd.exe에서
 python P3.py --input (inputfilepath) --hangulMealy hangulMealy.txt
 hangulMealy에는 jongsungMealy.txt 또는 chosungMealy.txt가 들어갈 수 있다. 각각 받침우선, 초성우선을 위한 밀리 머신 Description이다.
 
+hangulMealy Description은 vegare.txt를 P2.py를 통과시켜서 얻은 dfa에 Output function을 넣어서 완성한다.
+밀리 머신으로 쉽게 수정하기 위해서 Output function 같은 형식 문자열만 추가하도록 P2.py를 수정하고 만들었다.
+
 1.0 통상 입력
 제시된대로,
 123
@@ -48,4 +51,7 @@ fin : 글자를 강제로 닫는다.
 출력은, list에 객체로 저장해두었다가, hangulCodepoints()를 통해 유니코드로 변환 뒤 그 때 그 때 출력한다.
 
 3. PS
-받침우선으로만 작성되어있다.
+테스트로 썼던 input file 2개를 포함한다.
+inputLong은 주로 del 기능 구현 전 길고 복잡한 문장을 테스트했다.
+inputForDel은 del 기능 구현 후 프로젝트1의 테스트를 포함하는지 확인한다.
+초성우선은 Del을 구현하지 못했다.

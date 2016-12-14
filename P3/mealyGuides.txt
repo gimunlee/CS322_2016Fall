@@ -28,3 +28,9 @@ fin
 
 뱅이 에서 뱅 됐을 때 끝난거.
 을ㅇ 에서 을 됐을 때는 안 끝난거.
+
+delete cho and cat jong,ㄵ
+move cho to jong and new cho,ㄴ
+move cho to jong and new cho but not fin,ㅁ
+add cho to jong and new cho,ㅂ
+edit_instead
