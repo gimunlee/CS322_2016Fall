@@ -55,9 +55,9 @@
                 "--hangulMealy",
                 "./mdfaVegare_3.txt",
                 "--input",
-                "./dfainput.txt",
+                "./input.txt",
                 "--debug",
-                "0"
+                "1"
             ],
             "debugOptions": [
                 "WaitOnAbnormalExit",

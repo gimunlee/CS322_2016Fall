@@ -6,6 +6,7 @@ new with prev jong
 next는 루프돌 때 쓰기로.
 
 new,cho,ㄱ
+new but not fin,cho,ㄹ
 new with prev jong,ㅏ
 new with prev split jong,ㅏ
 next,cho,ㄱ
@@ -23,3 +24,7 @@ fin
 단모음은 단 하나의 기본모음으로, 이중모음은 두개 이상의 기본모음으로 구성된
 모음이라고 보시면 됩니다
 아래의 경우 가장 최근의 초성, 중성, 종성에서 지워져야 한다고 이해하시면 되겠습니다
+
+
+뱅이 에서 뱅 됐을 때 끝난거.
+을ㅇ 에서 을 됐을 때는 안 끝난거.

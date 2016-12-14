@@ -30,7 +30,9 @@ insertEeCases={
   'ㅏ':'ㅐ','ㅓ':'ㅔ','ㅑ':'ㅒ','ㅕ':'ㅖ','ㅘ':'ㅙ','ㅝ':'ㅞ'
 }
 delCases={
-    'ㄲ':'ㄱ','ㄸ':'ㄷ','ㅃ':'ㅂ','ㅆ':'ㅅ','ㅉ':'ㅈ','ㅐ':'ㅏ','ㅒ':'ㅑ'
+    'ㄲ':'ㄱ','ㄸ':'ㄷ','ㅃ':'ㅂ','ㅆ':'ㅅ','ㅉ':'ㅈ',
+    'ㅐ':'ㅏ','ㅒ':'ㅑ','ㅔ':'ㅓ','ㅖ':'ㅕ','ㅘ':'ㅗ','ㅙ':'ㅘ','ㅚ':'ㅗ','ㅝ':'ㅜ','ㅞ':'ㅝ','ㅟ':'ㅜ','ㅢ':'ㅡ',
+    'ㄳ':'ㄱ','ㄵ':'ㄴ','ㄶ':'ㄴ','ㄺ':'ㄹ','ㄻ':'ㄹ','ㄼ':'ㄹ','ㄽ':'ㄹ','ㄾ':'ㄹ','ㄿ':'ㄹ','ㅀ':'ㄹ','ㅄ':'ㅂ'
 }
 # Build a hangul unicode string, with combination method.
 def buildCombHangul(t) :
@@ -111,43 +113,71 @@ for line in inputFile.readlines() :
     stack=[]
     pulleossugi=[]
     for char in line :
+        print("STACK" + str(stack))
         if char == '\n' :
             break
         if char == '<' :
-            #####################################
+            # wasFin=False
+            targetEntry=stack[-1]
+            if pulleossugi[-1][1] in delCases.keys() :
+              #Reducing
+              possibleEumun=delCases[pulleossugi[-1][1]] # the reduced eumun
+
+              #Find rduced stack entry
+              while not(stack[-1][1] == possibleEumun) :
+                stack.pop()
+            else :
+              #Deleting
+              possibleGulzza=pulleossugi[-2]
+
+              #Find prev stack entry
+              while not(stack[-1][0] == possibleGulzza[0] and stack[-1][1] == possibleGulzza[1]) :
+                stack.pop()
+              pulleossugi.pop()
+            currentState=stack[-1][2]
+            pulleossugi[-1]=(stack[-1][0],stack[-1][1])
+            # if wasFin : #If fin also skipped, recover it
+            #   currentState=hangulMealy.delta[currentState,'!']
             continue
         if char == ' ' :
             pulleossugi.append(('space',))
             continue
         if (currentState, char) in hangulMealy.delta :
             #transition exists
-            def newHandler(result,lamb) : result.append((lamb[1],lamb[2]))
+            nextState=hangulMealy.delta[currentState,char]
+            def pushStack(stack, state, item, isNew) :
+              if isNew and len(stack)>0 : #Finish the previous gulzza
+                stack[-1] = (stack[-1][0],stack[-1][1],hangulMealy.delta[((stack[-1][2]),'!')])
+              stack.append((item[0],item[1],state))
+              return item
+            def newHandler(result,lamb) : result.append(pushStack(stack,nextState,(lamb[1],lamb[2]),True))
+            def newNotFinHandler(result,lamb) : result.append(pushStack(stack,nextState,(lamb[1],lamb[2]),False))
             def newWithPrevJong(result,lamb) :
               assert(result[-1][0]=='jong')
-              result[-1]=('cho',result[-1][1])
-              result.append(('jung',lamb[1]))
+              result[-1]=pushStack(stack,nextState,('cho',result[-1][1]),True)
+              result.append(pushStack(stack,nextState,('jung',lamb[1]),False))
             def newWithPrevSplitJong(result,lamb) :
               # print(result)
               assert(result[-1][0]=='jong')
               assert(result[-1][1] in doubleJaums.keys())
               temp = doubleJaums[result[-1][1]][1]
-              result[-1]=('jong',doubleJaums[result[-1][1]][0])
-              result.append(('cho',temp))
-              result.append(('jung',lamb[1])) 
-            def catHandler(result,lamb) : result.append((lamb[1],lamb[2]))
-            def editHandler(result,lamb) : assert(result[-1][0]==lamb[1]); result[-1]=(lamb[1],lamb[2])
+              result[-1]=pushStack(stack,nextState,('jong',doubleJaums[result[-1][1]][0]))
+              result.append(pushStack(stack,nextState,('cho',temp),True))
+              result.append(pushStack(stack,nextState,('jung',lamb[1]),False)) 
+            def catHandler(result,lamb) : result.append(pushStack(stack,nextState,(lamb[1],lamb[2]),False))
+            def editHandler(result,lamb) : assert(result[-1][0]==lamb[1]); result[-1]=pushStack(stack,nextState,(lamb[1],lamb[2]),False)
             def nextHandler(result,lamb) :
               assert(result[-1][1] in nextCases.keys())
               assert(lamb[2] in nextCases.keys())
               assert(result[-1][0]==lamb[1])
-              result[-1]=(lamb[1],nextCases[result[-1][1]])
+              result[-1]=pushStack(stack,nextState,(lamb[1],nextCases[result[-1][1]]),False)
             def insertHandler(result,lamb) :
               assert(result[-1][1] in insertEeCases.keys())
-              result[-1] = (result[-1][0],insertEeCases[result[-1][1]])
+              result[-1] = pushStack(stack,nextState,(result[-1][0],insertEeCases[result[-1][1]]),False)
             def deleteJongNewChoHandler(result,lamb) :
               # print("deleteJongNewCho : " + lamb[1])
               assert(result[-1][0]=='jong')
-              result[-1]=('cho',lamb[1])
+              result[-1]=pushStack(stack,nextState,('cho',lamb[1]),True)
             def deleteChoAddToJongHander(result,lamb) :
                 assert(result[-1][0]=='cho')
                 assert(result[-2][0]=='jong')
@@ -157,23 +187,26 @@ for line in inputFile.readlines() :
                 assert(newPair in doubleJaums.values())
                 for dj in doubleJaums :
                     if doubleJaums[dj]==newPair :
-                        result[-1]=('jong',dj)
+                        result[-1]=pushStack(stack,nextState,('jong',dj),False)
             def deleteChoEditJongHandler(result, lamb) :
                 assert(result[-1][0]=='cho')
                 assert(result[-2][0]=='jong')
                 result.pop()
-                result[-1]=('jong',lamb[1])
+                result[-1]=pushStack(stack,nextState,('jong',lamb[1]),False)
             def reduceJongNewChoHandler(result, lamb) :
                 assert(result[-1][0]=='jong')
                 assert( result[-1][1] in doubleJaums.keys() )
                 pair = doubleJaums[result[-1][1]]
-                result[-1]=('jong',pair[0])
-                result.append(('cho',lamb[1]))
+                result[-1]=pushStack(stack,nextState,('jong',pair[0]),False)
+                result.append(pushStack(stack,nextState,('cho',lamb[1])),False)
+            def finHandler(result, lamb) :
+                stack[-1]=(stack[-1][0],stack[-1][1],nextState)
 
             currentLamb = hangulMealy.lamb[currentState,char]
             if DEBUG : print(currentLamb,end=' ')
             handler={
               'new':newHandler, 'cat':catHandler, 'edit':editHandler,
+              'new but not fin':newNotFinHandler,
               'delete prev jong and new cho':deleteJongNewChoHandler,
               'new with prev jong':newWithPrevJong,
               'new with prev split jong':newWithPrevSplitJong,
@@ -181,7 +214,8 @@ for line in inputFile.readlines() :
               'insert':insertHandler,
               'delete cho and add to prev jong':deleteChoAddToJongHander,
               'delete cho and edit prev jong':deleteChoEditJongHandler,
-              'reduce prev jong and new cho':reduceJongNewChoHandler
+              'reduce prev jong and new cho':reduceJongNewChoHandler,
+              'fin':finHandler
             }
             if currentLamb[0] in handler.keys() :
               handler[currentLamb[0]](pulleossugi,currentLamb)
@@ -189,13 +223,14 @@ for line in inputFile.readlines() :
                 print("%3s to %3s by %s"%(currentState,hangulMealy.delta[currentState,char],char))
 
             #state transition
-            currentState=hangulMealy.delta[currentState,char]
+            currentState=nextState
         else :
             # no transition
             outputLine=["No path exists!"]
             break
     if DEBUG : print(outputLine)
     if DEBUG : print(pulleossugi)
+    if DEBUG : print("STACK : " + str(stack))
     print("(입력) $ ",end='')
     print(line[:-1], end="")
     if not line[-1] is '\n' : print(line[-1],end='')
