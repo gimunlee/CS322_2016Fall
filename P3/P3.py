@@ -113,7 +113,7 @@ for line in inputFile.readlines() :
     stack=[]
     pulleossugi=[]
     for char in line :
-        print("STACK" + str(stack))
+        if DEBUG : print("STACK" + str(stack))
         if char == '\n' :
             break
         if char == '<' :
@@ -161,7 +161,7 @@ for line in inputFile.readlines() :
               assert(result[-1][0]=='jong')
               assert(result[-1][1] in doubleJaums.keys())
               temp = doubleJaums[result[-1][1]][1]
-              result[-1]=pushStack(stack,nextState,('jong',doubleJaums[result[-1][1]][0]))
+              result[-1]=pushStack(stack,nextState,('jong',doubleJaums[result[-1][1]][0]),False)
               result.append(pushStack(stack,nextState,('cho',temp),True))
               result.append(pushStack(stack,nextState,('jung',lamb[1]),False)) 
             def catHandler(result,lamb) : result.append(pushStack(stack,nextState,(lamb[1],lamb[2]),False))
@@ -198,7 +198,7 @@ for line in inputFile.readlines() :
                 assert( result[-1][1] in doubleJaums.keys() )
                 pair = doubleJaums[result[-1][1]]
                 result[-1]=pushStack(stack,nextState,('jong',pair[0]),False)
-                result.append(pushStack(stack,nextState,('cho',lamb[1])),False)
+                result.append(pushStack(stack,nextState,('cho',lamb[1]),False))
             def finHandler(result, lamb) :
                 stack[-1]=(stack[-1][0],stack[-1][1],nextState)
 

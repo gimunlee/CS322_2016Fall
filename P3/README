@@ -1,0 +1,51 @@
+20120666 이기문 Project1
+
+환경은 python3, windows이다.
+
+1. 사용법
+cmd.exe에서
+python P3.py --input (inputfilepath) --hangulMealy hangulMealy.txt
+hangulMealy에는 jongsungMealy.txt 또는 chosungMealy.txt가 들어갈 수 있다. 각각 받침우선, 초성우선을 위한 밀리 머신 Description이다.
+
+1.0 통상 입력
+제시된대로,
+123
+qwe
+asd
+zxc
+으로 sky-ii한글 3x4 키보드를 따라한다.
+1.1 특수 문자
+del은 <으로 표시한다.
+같은 버튼을 누르면 계속 새 글자로 넘어가지 않는다. 겹자음을 쓰고 싶지 않을 때도 있다. 그래서 글자를 닫는 닫힘문자(상용 키보드의 Space)로 !을 사용한다.
+ㅇㅏㄴㅈㅇㅡㄴㅂㅏㅣㅇ!ㅇㅣ와 같이 사용하면 된다. backspace에서 이 입력을 신경쓸 필요는 없다.
+
+2. 설명
+사용한 3x4 문자 배치는 Sky-II 한글 (혹은 Vega 한글)이다.
+P2로, 한글 문자열을 확인하는 DFA를 만든 다음, (vegare.txt=>mdfaVegare.txt)
+mealy machine의 액션부분은 고유의 문법에 따라 명령어를 전달하고, 이를 handler를 정해 처리한다.
+명령어는 다음과 같다.
+new : 초성으로 새 글자를 시작한다.
+new but not fin : 새 문자를 시작하되, 이전 글자를 닫지 않는다. 겹자음으로 다시 합쳐질 수 있다.
+new with prev jong : 이전 종성을 초성으로 바꾸고 중성을 붙이며 새 글자를 만든다.
+new with prev split jong : 이전 겹자음 종성을 쪼개고 중성을 붙이며 새 글자를 만든다.
+next : 이전 음운을 loop에 따라 전진시킨다. (ex : ㄴ->ㄹ->ㄴ->ㄹ... ㄱ->ㅋ->ㄲ->ㄱ->ㅋ->... ㅏ->ㅑ->ㅏ... ㅣ->ㅡ->ㅢ->ㅣ->...)
+edit : 직전 음운을 수정한다.
+cat : 다음 음운을 붙여준다.
+delete prev jong and new  cho : 이전 종성은 없애고 새 초성을 붙인다.
+delete cho and edit add to prev jong : 현재의 임시 입력된 초성을 없애고, 이전 종성을 겹자음으로 만든다.
+delete cho and edit prev jong : 현재의 임시 입력된 초성을 없애고, 이전 종성을 수정한다.
+reduce prev jong and new cho : 이전 겹자음을 쪼개고, 새 초성을 추가한다.
+insert : ㅣ와 같이 작대기를 붙인다.
+fin : 글자를 강제로 닫는다. 
+
+3. 입력 규칙
+기본적으로는 Sky-II 한글 키보드의 규칙을 닮게 하였다.
+모호할 점들을 명시한다.
+프로젝트의 규칙에 따라 쌍자음은 단자음으로 바꾸는데, 그 이후 다시 입력하면 ㄱ->ㅋ->ㄲ->backspace->ㅋ 으로 진행시킨다.
+글자가 한번 닫혔으면, 그 글자의 음운을 수정하기 전까지는 backspace를 하더라도 닫힌채로 유지된다. (ex ㅂㅐㅇ!ㅇㅣ<<ㅇㅣ는 '뱅이'지만, ㅂㅐㅇㅇㅣ<<ㅇㅣ는 '배히'이다.)
+글자가 진행되어서 닫히지 않았거나, 음운이 backspace로 수정되었으면, 닫히지 않는다. (ㅇㅡㄹㅍ<ㄷ은 을ㄷ이지만, 여기서 ㄷ을 또 입력하면 읉이다. ㅇㅡㄹㅍㅈㅗ<<<ㅍ은 '읊'이다.)
+
+출력은, list에 객체로 저장해두었다가, hangulCodepoints()를 통해 유니코드로 변환 뒤 그 때 그 때 출력한다.
+
+3. PS
+받침우선으로만 작성되어있다.

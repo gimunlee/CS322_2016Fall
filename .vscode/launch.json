@@ -53,11 +53,11 @@
             "program": "${workspaceRoot}/P3/P3.py",
             "args": [
                 "--hangulMealy",
-                "./mdfaVegare_3.txt",
+                "./jongsungMealy.txt",
                 "--input",
                 "./input.txt",
                 "--debug",
-                "1"
+                "0"
             ],
             "debugOptions": [
                 "WaitOnAbnormalExit",
